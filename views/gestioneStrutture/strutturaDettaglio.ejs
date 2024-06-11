@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Dettaglio Struttura</title> 	
+  <%- include('../../script/ProprietarioCSS.ejs') %>
+  <%- include('../../script/Stelle.ejs') %>
+  <link rel="stylesheet" href="../../public/stylesheets/css/dettaglio/button.css">
+  <link rel="stylesheet" type="text/css" href="../../public/stylesheets/css/admin/inserimentoStruttura/button.css">
+  <link rel="stylesheet" type="text/css" href="../../public/stylesheets/css/dettaglio/style.css">
+  <link rel="stylesheet" type="text/css" href="../../public/stylesheets/css/dettaglio/custom.css">
+</head>
+<body id="page-top">
+  <div id="wrapper">
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/indexProprietario">
+        <div class="sidebar-brand-icon rotate-n-15">
+          <i class="fas fa-cog"></i>
+        </div>
+        <div class="sidebar-brand-text mx-3">Benvenuto</div>
+      </a>
+      <!-- Divider -->
+      <hr class="sidebar-divider my-0">
+
+      <!-- Nav Item - Dashboard -->
+      <li class="nav-item">
+        <a class="nav-link" href="/indexProprietario">
+          <i class="far fa-address-book"></i>
+          <span>Home</span></a>
+      </li>
+
+      <!-- Divider -->
+      <hr class="sidebar-divider">
+
+      <!-- Heading -->
+      <div class="sidebar-heading">
+        Strumenti
+      </div>
+      <li class="nav-item">
+        <a class="nav-link" href="/inserimentoStruttura" method="GET">
+          <i class="fas fa-home"></i>
+          <span>Inserimento Struttura</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/selezioneModificaStruttura" method="GET">
+          <i class="fas fa-hammer"></i>
+          <span>Modifica Struttura</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/gestioneRichieste" method="GET">
+          <i class="far fa-comments"></i>
+          <span>Gestione Richieste</span>
+        </a>
+      </li>
+      <!-- Divider -->
+      <hr class="sidebar-divider">
+
+      <!-- Heading -->
+      <div class="sidebar-heading">
+        Servizi Esterni
+      </div>
+      <!-- Nav Item - Charts -->
+      <li class="nav-item">
+        <a class="nav-link" href="/datiOspite" method="GET">
+          <i class="far fa-address-card"></i>
+          <span>Comunicazione Ospiti</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/rendicontoTrimestrale" method="GET">
+          <i class="fas fa-fw fa-table"></i>
+          <span>Rendiconto Trimestrale</span></a>
+      </li>
+      <hr class="sidebar-divider d-none d-md-block">
+      <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+      </div>
+    </ul>
+
+    <div id="content-wrapper" class="d-flex flex-column">
+    <%- include('../../script/NavbarProp.ejs') %>
+    <% dettaglio.forEach(function(dettaglio){%>
+    <section class="ftco-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8">
+          		  <div class="col-md-12 ftco-animate">
+                <h2 class="mb-4"><%=dettaglio.nome_str%></h2>
+          			<div class="single-slider owl-carousel">
+          				<div class="item">
+          					<div href="../../public/images/filesystem/<%=dettaglio.nome_imm1%>" class="room-img image-popup" style="background-image: url(../../public/images/filesystem/<%=dettaglio.nome_imm1%>);"></div>
+          				</div>
+          				<div class="item">
+          					<div href="../../public/images/filesystem/<%=dettaglio.nome_imm2%>" class="room-img image-popup" style="background-image: url(../../public/images/filesystem/<%=dettaglio.nome_imm2%>);"></div>
+          				</div>
+          				<div class="item">
+          					<div href="../../public/images/filesystem/<%=dettaglio.nome_imm3%>" class="room-img image-popup" style="background-image: url(../../public/images/filesystem/<%=dettaglio.nome_imm3%>);"></div>
+          				</div>
+                  <div class="item">
+          					<div href="../../public/images/filesystem/<%=dettaglio.nome_imm4%>" class="room-img image-popup" style="background-image: url(../../public/images/filesystem/<%=dettaglio.nome_imm4%>);"></div>
+          				</div>
+                  <div class="item">
+          					<div href="../../public/images/filesystem/<%=dettaglio.nome_imm5%>" class="room-img image-popup" style="background-image: url(../../public/images/filesystem/<%=dettaglio.nome_imm5%>);"></div>
+          				</div>
+          			</div>
+              </div>
+              <h3>Descrizione</h3>
+              <p> <%=dettaglio.descrizione_struttura%> </p>
+            </div>
+          </div>
+          		<div class="col-md-12 room-single mt-4 mb-5 ftco-animate" style="display: flex; justify-content: space-between;">
+                <div class="d-md-flex mt-5 mb-5" >
+                  <ul class="list">
+    						<li>Situato a : <%=dettaglio.comune%></li>
+                <li>CAP: <span> <%=dettaglio.cap%> </span> </li>
+              </ul>
+              <ul class="list ml-md-5">
+                <li>in via : <%=dettaglio.indirizzo%> <span> <%=dettaglio.civico%></span> </li>
+                <li><span>Distanza dal centro: </span> <%=dettaglio.distanza_km_centro%> km </li>
+              </ul>
+                <ul class="list ml-md-5">
+                  <li><span>Civico: </span> <%=dettaglio.civico%> </li>
+                  <li><span>Tassa di soggiorno: </span> <%=dettaglio.tassa_di_soggiorno%> </li>
+                </ul>
+              </div>
+               
+    						<div class="d-md-flex mt-5 mb-5">
+                  <ul class="list ml-md-5">
+                    <li style="color:red;"><span style="color:black">Numero ospiti rimanenti: </span> <%=dettaglio.num_ospiti%></li>
+	    							<li><span>Camera Singole rimanenti: </span> <%=dettaglio.camera_singola%> </li>
+	    							<li><span>Camera Doppia rimanenti: </span> <%=dettaglio.camera_doppia%></li>
+                    <li><span>Camera Tripla rimanenti: </span> <%=dettaglio.camera_tripla%></li>
+	    							<li><span>Camera Quadrupla rimanenti: </span> <%=dettaglio.camera_quadrupla%></li>
+	    						</ul>
+                </div>
+               
+            </div>
+            <p>Contattaci al numero : <%=dettaglio.telefono%></p>
+              <div class="col-md-12 properties-single ftco-animate mb-5 mt-4">
+                <h4 class="mb-4"> Servizi </h4>
+                <div class="row">
+          				<div class="row-md-10">
+                    <% if (dettaglio.colazione == 1) { %>
+                    <input class="checkbox-booking" type="checkbox" name="booking" id="booking-1" disabled>
+                    <label class="for-checkbox-booking" for="booking-1">
+                     </i><span class="text">Colazione</span> <i class="fas fa-coffee"></i>
+                    </label>
+                    <% } %>
+                    <% if (dettaglio.wifi == 1) { %>
+                    <input class="checkbox-booking" type="checkbox" name="booking" id="booking-2" disabled>
+                    <label class="for-checkbox-booking" for="booking-2">
+                     <span class="text">wifi</span><i class="fas fa-wifi"></i>
+                    </label>
+                    <% } %>
+                    <% if (dettaglio.piscina == 1) { %>
+                    <input class="checkbox-booking" type="checkbox" name="booking" id="booking-3" disabled>
+                    <label class="for-checkbox-booking" for="booking-3">
+                     <span class="text">piscina</span><i class="fas fa-swimming-pool"></i>
+                    </label>
+                    <% } %>
+                    <% if (dettaglio.giardino == 1) { %>
+                    <input class="checkbox-booking" type="checkbox" name="booking" id="booking-4" disabled>
+                    <label class="for-checkbox-booking" for="booking-4">
+                     <span class="text">giardino</span><i class="fab fa-pagelines"></i>
+                    </label>
+                    <% } %>
+                    <% if (dettaglio.parcheggio == 1) { %>
+                    <input class="checkbox-booking" type="checkbox" name="booking" id="booking-5" disabled>
+                    <label class="for-checkbox-booking" for="booking-5">
+                     <span class="text">parcheggio</span><i class="fas fa-parking"></i>
+                    </label>
+                    <% } %>
+                    <% if (dettaglio.tv == 1) { %>
+                    <input class="checkbox-booking" type="checkbox" name="booking" id="booking-6" disabled>
+                     <label class="for-checkbox-booking" for="booking-6">
+                      <span class="text">tv</span><i class="fas fa-tv"></i>
+                     </label>
+                     <% } %>
+                     <% if (dettaglio.libri == 1) { %>
+                     <input class="checkbox-booking" type="checkbox" name="booking" id="booking-7" disabled>
+                    <label class="for-checkbox-booking" for="booking-7">
+                     <span class="text">libri</span> <i class="fas fa-book"></i><i class="fas fa-book"></i>
+                    </label>
+                    <% } %>
+                    <% if (dettaglio.palestra == 1) { %>
+                    <input class="checkbox-booking" type="checkbox" name="booking" id="booking-8" disabled>
+                    <label class="for-checkbox-booking" for="booking-8">
+                     <span class="text">palestra</span><i class="fas fa-dumbbell"></i>
+                    </label>
+                    <% } %>
+                    <% if (dettaglio.animali == 1) { %>
+                    <input class="checkbox-booking" type="checkbox" name="booking" id="booking-9" disabled>
+                    <label class="for-checkbox-booking" for="booking-9">
+                     <span class="text">Animali Ammessi</span><i class="fas fa-paw"></i>
+                    </label>
+                    <% } %>
+                    <% if (dettaglio.cucina == 1) { %>
+                    <input class="checkbox-booking" type="checkbox" name="booking" id="booking-10" disabled>
+                    <label class="for-checkbox-booking" for="booking-10">
+                     <span class="text">Cucina</span><i class="fas fa-utensils"></i>
+                    </label>
+                    <% } %>
+                    <% if (dettaglio.fumare == 1) { %>
+                    <input class="checkbox-booking" type="checkbox" name="booking" id="booking-11" disabled>
+                    <label class="for-checkbox-booking" for="booking-11">
+                     <span class="text">Fumare</span><i class="fas fa-smoking-ban"></i>
+                    </label>
+                    <% } %>
+                    <% if (dettaglio.doccia == 1) { %>
+                    <input class="checkbox-booking" type="checkbox" name="booking" id="booking-12" disabled>
+                    <label class="for-checkbox-booking" for="booking-12">
+                     <span class="text">Doccia</span><i class="fas fa-shower"></i>
+                    </label>
+                    <% } %>
+                    <% if (dettaglio.condizionatore == 1) { %>
+                      <input class="checkbox-booking" type="checkbox" name="booking" id="booking-13" disabled>
+                      <label class="for-checkbox-booking" for="booking-13">
+                       <span class="text">Aria condizionata</span><i class="fas fa-wind"></i>
+                      </label>
+                    <% } %>
+                    <%}); %>
+                  </div>
+                </div>
+              </div>
+          		<div class="col-md-12 properties-single ftco-animate mb-5 mt-4">
+          			<h4 class="mb-4">Recensioni &amp; Punteggi</h4>
+          			<div class="row">
+          				<div class="col-md-6">
+                    <% recensione.forEach(function(recensione, stella){%>
+                      <div class="recensioniItem container-fluid" >
+                        <h6><%= recensione.ref_client %></h6>
+                        <p id="valutazione">  </p> <script type="text/javascript">Stella(<%=recensione.punteggio%>)</script>
+                        <p> <%=recensione.commento%> </p>
+                      </div>
+                    <%}); %>
+          				</div>
+          			</div>
+          		</div>
+          </div> 
+        
+        </div>
+      </div>
+    </section>      
+        
+    <footer class="sticky-footer bg-white">
+        <div class="container my-auto">
+          <div class="copyright text-center my-auto">
+            <span>Copyright &copy; Team Maag 2020</span>
+          </div>
+        </div>
+    </footer>
+</div>
+
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
+
+  <%- include('../../script/LogoutProp.ejs') %>
+  <%- include('../../script/Alert.ejs') %>
+  <%- include('../../script/ProprietarioJS.ejs') %>
+
+</body>
+</html>

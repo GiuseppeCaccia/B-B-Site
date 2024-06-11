@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Hiroto Template">
+    <meta name="keywords" content="Hiroto, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Comunicazione</title>
+    <link rel="stylesheet" href="../../public/stylesheets/css/admin/comunicazione/css/style.css">
+    <link rel="stylesheet" href="../../public/stylesheets/css/admin/sb-admin-2.css">
+    <link rel="stylesheet" href="../../public/stylesheets/css/admin/gestioneRichieste/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="../../public/stylesheets/css/admin/gestioneRichieste/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="../../public/stylesheets/css/admin/gestioneRichieste/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="../../public/stylesheets/css/admin/gestioneRichieste/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="../../public/stylesheets/css/admin/gestioneRichieste/jquery-ui.min.css" type="text/css">
+    <link rel="stylesheet" href="../../public/stylesheets/css/admin/gestioneRichieste/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="../../public/stylesheets/css/admin/gestioneRichieste/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="../../public/stylesheets/css/admin/gestioneRichieste/style.css" type="text/css">
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+</head>
+<body id="page-top" >
+  <div id="wrapper" >
+      <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/indexProprietario">
+          <div class="sidebar-brand-icon rotate-n-15">
+            <i class="fas fa-cog"></i>
+          </div>
+          <div class="sidebar-brand-text mx-3">Benvenuto</div>
+        </a>
+        <!-- Divider -->
+        <hr class="sidebar-divider my-0">
+  
+        <!-- Nav Item - Dashboard -->
+        <li class="nav-item">
+          <a class="nav-link" href="/indexProprietario">
+            <i class="far fa-address-book"></i>
+            <span>Home</span></a>
+        </li>
+  
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+  
+        <!-- Heading -->
+        <div class="sidebar-heading">
+          Strumenti
+        </div>
+        <li class="nav-item">
+          <a class="nav-link" href="/inserimentoStruttura" method="GET">
+            <i class="fas fa-home"></i>
+            <span>Inserimento Struttura</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/selezioneModificaStruttura" method="GET">
+            <i class="fas fa-hammer"></i>
+            <span>Modifica Struttura</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/gestioneRichieste" method="GET">
+            <i class="far fa-comments"></i>
+            <span>Gestione Richieste</span>
+          </a>
+        </li>
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+  
+        <!-- Heading -->
+        <div class="sidebar-heading">
+          Servizi Esterni
+        </div>
+        <!-- Nav Item - Charts -->
+        <li class="nav-item active">
+          <a class="nav-link" href="/datiOspite" method="GET">
+            <i class="fas fa-angle-right"></i>
+            <span>Comunicazione Ospiti</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/rendicontoTrimestrale" method="GET">
+            <i class="fas fa-fw fa-table"></i>
+            <span>Rendiconto Trimestrale</span></a>
+        </li>
+        <hr class="sidebar-divider d-none d-md-block">
+        <div class="text-center d-none d-md-inline">
+          <button class="rounded-circle border-0" id="sidebarToggle"></button>
+        </div>
+      </ul>
+
+      <div id="content-wrapper" class="d-flex flex-column" >
+        <%- include('../../script/NavbarProp.ejs') %>
+        <section style="display: flex; justify-content: center;">
+          <form class="form_prin"  action="/inviaForm"  method="POST" enctype="multipart/form-data">
+            <button type="button" class="collapsible" >Ospite 1</button>
+            <div class="div">
+              <div class="testbox div">
+              <div class="form div"  > 
+                  <div class="item div">
+                    <p>Nome</p>
+                    <input type="text" name="nome" required/>
+                  </div>
+                  <div class="item div">
+                    <p>Cognome</p>
+                    <input type="text" name="cognome" required/>
+                  </div>
+                  <div class="item div">
+                    <p>Data di Nascita</p>
+                    <input type="date" name="dataNascita" required/>
+                  </div>
+                  <div class="item div">
+                    <p>Indirizzo</p>
+                    <div class="city-item div">
+                      <input type="text" name="via" placeholder="Indirizzo" required/>
+                      <input type="text" name="citta" placeholder="Città" required/>
+                      <input type="text" name="provincia" placeholder="Provincia" required/>
+                      <input type="text" name="regione" placeholder="Regione" required/>
+                      <input type="text" name="cap" placeholder="Cap" required/>
+                      <input type="text" name="civico" placeholder="Civico" required/>
+                    </div>
+                  </div>
+                  <div class="item div">
+                    <p>Email</p>
+                    <input type="text" name="email" value="<%=prenotati.email_cliente%>" required/>
+                  </div>
+                  <div class="item div">
+                    <p>Number</p>
+                    <input type="text" name="numero" required/>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <% for (var i =2; i <= prenotati.num_prenotati;  i++ ) { %>
+              <button type="button" class="collapsible" >Ospite <%=i%></button>
+               <div class="content div">
+                <div class="testbox div">
+                <div class="form div"  > 
+                  
+                    <div class="item div">
+                      <p>Nome</p>
+                      <input type="text" name="nome" required/>
+                    </div>
+                    <div class="item div">
+                      <p>Cognome</p>
+                      <input type="text" name="cognome" required/>
+                    </div>
+                    <div class="item div">
+                      <p>Data di Nascita</p>
+                      <input type="date" name="dataNascita" required/>
+                    </div>
+                    <div class="item div">
+                      <p>Indirizzo</p>
+                    
+                      <div class="city-item div">
+                        <input type="text" name="via" placeholder="Indirizzo" required/>
+                        <input type="text" name="citta" placeholder="Città" required/>
+                        <input type="text" name="provincia" placeholder="Provincia" required/>
+                        <input type="text" name="regione" placeholder="Regione" required/>
+                        <input type="text" name="cap" placeholder="Cap" required/>
+                        <input type="text" name="civico" placeholder="Civico" required/>
+                      </div>
+                    </div>
+          
+                    <div class="item div">
+                      <p>Email</p>
+                      <input type="text" name="email" required/>
+                    </div>
+                    <div class="item div">
+                      <p>Number</p>
+                      <input type="text" name="numero" required/>
+                    </div>
+               
+                  </div>
+                </div>
+              </div>
+                   <% } %>
+                   <main class="main_full">
+                    <div class="container">
+                      <div class="panel">
+                        <div class="button_outer" style="background-color: burlywood;">
+                          <div class="btn_upload">
+                            <input type="file" id="foto" name="foto" multiple onchange="checkFoto(<%=prenotati.ospiti%>)" required>
+                            Carica Foto
+                          </div>
+                          <div class="processing_bar"></div>
+                          <div class="success_box"></div>
+                        </div>
+                      </div>
+                      <div class="error_msg"></div><div id="numImg" style="margin:0 auto; width:131px"></div>
+                      <div class="uploaded_file_view" id="uploaded_view">
+                        <span class="file_remove">X</span>
+                      </div>
+                    </div>
+                  </main>
+                   <input type="hidden" name="comune_str" value="<%=prenotati.comune%>"/>
+                   <input type="hidden" name="via_str" value="<%=prenotati.via%>"/>
+                   <input type="hidden" name="data_arrivo" value="<%=prenotati.data_arrivo%>"/>
+                   <input type="hidden" name="data_ritorno" value="<%=prenotati.data_ritorno%>"/>
+                   <button type="submit" id="ok"> Invia </button>
+                 </form>
+          </section>
+          <footer class="sticky-footer bg-white" style="margin-top: 10vw;">
+            <div class="container my-auto">
+              <div class="copyright text-center my-auto">
+                <span>Copyright &copy; Team Maag 2020</span>
+              </div>
+            </div>
+          </footer>
+       </div>
+    </div>
+
+    <%- include('../../script/InserimentoFoto.ejs') %>
+
+    <script>
+			function checkFoto(numPrenotati){
+			  var numImages = $("#foto")[0].files.length;
+        document.getElementById("numImg").innerHTML="Hai inserito " + numImages + " foto"; 
+        console.log(numImages);
+        console.log(numPrenotati);
+			  if(numImages < numPrenotati){
+				alert('INSERISCI GLI ALLEGATI DEI DOCUMENTI DI IDENTITA DI TUTTI GLI OSPITI ');
+				   $('#ok').prop("disabled",true);
+			  }
+			  else{
+				$('#ok').prop("disabled",false);
+			  }
+			}
+      </script>
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+    </a>
+
+    <%- include('../../script/LogoutProp.ejs') %>
+    <%- include('../../script/Alert.ejs') %>
+    <%- include('../../script/ProprietarioJS.ejs') %>
+    <script src="../../public/js/admin/gestioneRichieste/jquery-3.3.1.min.js"></script>
+    <script src="../../public/js/admin/gestioneRichieste/bootstrap.min.js"></script>
+    <script src="../../public/js/admin/gestioneRichieste/jquery.nice-select.min.js"></script>
+    <script src="../../public/js/admin/gestioneRichieste/jquery-ui.min.js"></script>
+    <script src="../../public/js/admin/gestioneRichieste/jquery.slicknav.js"></script>
+    <script src="../../public/js/admin//gestioneRichieste/owl.carousel.min.js"></script>
+    <script src="../../public/js/admin/gestioneRichieste/main.js"></script>
+    <script src="../../public/stylesheets/css/admin/comunicazione/js/collapse.js" ></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

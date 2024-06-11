@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="it">
+  <head>
+    <title>Maag</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<%- include('../script/IndexCSS.ejs') %>
+	<%- include('../script/Stelle.ejs') %>
+
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+	    <div class="container">
+	      <a  onmouseover="this.style.color='black';"  onmouseout="this.style.color='white'" class="navbar-brand" href="/">Maag</a>
+	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+	        <span class="oi oi-menu"></span> Menu
+	      </button>
+	      <div class="collapse navbar-collapse" id="ftco-nav">
+	        <ul class="navbar-nav ml-auto">
+				<% if (sessione == undefined) { %>
+					<li class="nav-item active">
+						<a href="/accesso"   onmouseover="this.style.color='black';"  onmouseout="this.style.color='white'" method = "GET" class="nav-link">Accedi</a>
+					</li>
+					<li class="nav-item active">
+						<a href="/registrazione"   onmouseover="this.style.color='black';"  onmouseout="this.style.color='white'" method = "GET" class="nav-link">Registrati</a>
+					</li>
+				<% }
+				else { %>
+					<li class="nav-item active">
+						<a href="/cronologiaPrenotazioni"  onmouseover="this.style.color='black';"  onmouseout="this.style.color='white'" method = "GET" class="nav-link">Cronologia Prenotazioni</a>
+					</li>
+					<li class="nav-item active">
+						<a href="/LogoutCliente"  onmouseover="this.style.color='black';"  onmouseout="this.style.color='white'" method = "GET" class="nav-link">Logout</a>
+					</li>
+				<% } %>
+			</ul>
+	      </div>
+	    </div>
+    </nav>
+
+    <section class="home-slider owl-carousel">
+      <div class="slider-item" style="background-image:url(images/bg_1.jpg);">
+      	<div class="overlay"></div>
+        <div class="container">
+          <div class="row no-gutters slider-text align-items-center justify-content-center">
+          <div class="col-md-12 ftco-animate text-center">
+          	<div class="text mb-5 pb-3">
+	            <h1 class="mb-3">Benvenuto al portale MAAG! </h1>
+	            <h2>B&B &amp; Case Vacanze</h2>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+
+      <div class="slider-item" style="background-image:url(images/bg_2.jpg);">
+      	<div class="overlay"></div>
+        <div class="container">
+          <div class="row no-gutters slider-text align-items-center justify-content-center">
+          <div class="col-md-12 ftco-animate text-center">
+          	<div class="text mb-5 pb-3">
+	            <h1 class="mb-3">Prenota una vacanza da sogno</h1>
+	            <h2>Abbandona la quotidianità</h2>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="ftco-booking">
+    	<div class="container">
+    		<div class="row">
+    			<div class="col-lg-12">
+    				<form action="/ricerca" method="post" class="booking-form">
+	        		<div class="row">
+                		<div class="col-md d-flex">
+	        				<div class="form-group p-4 align-self-stretch d-flex align-items-end">
+	        					<div class="wrap">
+			      					<label for="#">Destinazione</label>
+                      				<input name="destinazione" id="destinazione" type="text" class="form-control" placeholder="Destinazione" required>
+				            	</div>
+		              		</div>
+	        			</div>
+	        			<div class="col-md-3 d-flex">
+	        				<div class="form-group p-4 align-self-stretch d-flex align-items-end">
+	        					<div class="wrap">
+				    					<label for="#">Data arrivo</label>
+				    					<input id="dp1" name ="data_arrivo" type="text" class="form-control clickable input-md" id="DtChkIn" placeholder="Check-in date" autocomplete="off" required>
+			    					</div>
+			    				</div>
+	        			</div>
+	        			<div class="col-md-3 d-flex">
+	        				<div class="form-group p-4 align-self-stretch d-flex align-items-end">
+	        					<div class="wrap">
+				    					<label for="#">Data ritorno</label>
+				    					<input id="dp2" name="data_ritorno" type="text" class="form-control clickable input-md" id="DtChkOut" placeholder="Check-out date" autocomplete="off" required>
+			    			  	</div>
+			    			</div>
+	        			</div>
+	        			<div class="col-md-3 d-flex">
+	        				<div class="form-group p-4 align-self-stretch d-flex align-items-end">
+	        					<div class="wrap">
+									<label for="#">Ospiti</label>
+			      					<input name="adulti" id="adulti" type="number" min="1" max="10" class="form-control" placeholder="18+" required>
+				            	</div>
+								<div class="wrap">
+			      					<input name="ragazzi" id="ragazzi" type="number" min="0" max="10" class="form-control" placeholder="12+">
+				            	</div>
+                    			<div class="wrap">
+			      					<input name="bambini" id="bambini" type="number" min="0" max="10" class="form-control" placeholder="0+">
+				            	</div>
+		              		</div>
+	        			</div>
+	        			<div class="col-md d-flex">
+	        				<div class="form-group d-flex align-self-stretch">
+			              <input type="submit" name="cerca" id="cerca" value="Cerca strutture" class="btn btn-primary py-3 px-4 align-self-stretch">
+			            </div>
+	        			</div>
+	        		</div>
+	        	</form>
+	    		</div>
+    		</div>
+    	</div>
+    </section>
+
+    <section class="ftco-section ftc-no-pb ftc-no-pt">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-5 p-md-5 img img-2 d-flex justify-content-center align-items-center" style="background-image: url(images/image_3.jpg);">
+						<a href="https://www.youtube.com/watch?v=w9_jNWpkP7k" class="icon popup-vimeo d-flex justify-content-center align-items-center">
+							<span class="icon-play"></span>
+						</a>
+					</div>
+					<div class="col-md-7 py-5 wrap-about pb-md-5 ftco-animate">
+	          <div class="heading-section heading-section-wo-line pt-md-5 pl-md-5 mb-5">
+	          	<div class="ml-md-0">
+		          	<span class="subheading">La nostra storia</span>
+		            <h2 class="mb-4">La nostra storia</h2>
+	            </div>
+	          </div>
+	          <div class="pb-md-5">
+							<p> Il caso, il destino ha unito un team di studenti con lo stesso obiettivo. Costruire un sito web che potesse soddisfare chiunque </p>
+							<p> Ci siamo riusciti, contiamo piu di quattro milioni di utenti soddisfatti.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+    <section class="ftco-section bg-light">
+    	<div class="container">
+				<div class="row justify-content-center mb-5 pb-3">
+          <div class="col-md-7 heading-section text-center ftco-animate">
+            <h2 class="mb-4">Top strutture</h2>
+          </div>
+        </div>
+    		<div class="row rowTop">
+          <% immagine.forEach(function(immagine){%>
+    			<div class="col-sm col-md-6 col-lg-4 ftco-animate">
+    				<div class="room">
+    					<a href="../public/images/filesystem/<%=immagine.nome_imm1%>" class="img d-flex justify-content-center align-items-center image-popup" style="background-image: url(../public/images/filesystem/<%=immagine.nome_imm1%>);">
+    						<div class="icon d-flex justify-content-center align-items-center">
+    							<span class="icon-search2"></span>
+    						</div>
+    					</a>
+    					<div class="text p-3 text-center">
+    						<h3 class="mb-3"><button class="btn-custom" onclick="campi('<%=immagine.nome_str%>')"><%=immagine.nome_str%></button></h3>
+    						<p><span class="price mr-2"><%=immagine.prezzo%>€</span> <span class="per">per persona</span></p>
+                			<p id="valutazione">  </p> <script type="text/javascript">Stella(<%=immagine.valutazione_struttura%>)</script>
+               				<p id="stelline" style="color: #FFBF00; "></p>
+    						<hr>
+    						<p class="pt-1"><button onclick="campi('<%=immagine.nome_str%>')" class="btn-custom">Visualizzala in dettaglio <span class="icon-long-arrow-right"></span></button></p>
+    					</div>
+    				</div>
+    			</div>
+          <%}); %>
+    		</div>
+    	</div>
+    </section>
+
+    <section class="ftco-section ftco-counter img" id="section-counter" style="background-image: url(images/bg_1.jpg);">
+    	<div class="container">
+    		<div class="row justify-content-center">
+    			<div class="col-md-10">
+		    		<div class="row">
+		          <div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
+		            <div class="block-18 text-center">
+		              <div class="text">
+		                <strong class="number" data-number="5000000">0</strong>
+		                <span>Clienti contenti</span>
+		              </div>
+		            </div>
+		          </div>
+		          <div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
+		            <div class="block-18 text-center">
+		              <div class="text">
+		                <strong class="number" data-number="100000">0</strong>
+		                <span>strutture</span>
+		              </div>
+		            </div>
+		          </div>
+		          <div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
+		            <div class="block-18 text-center">
+		              <div class="text">
+		                <strong class="number" data-number="4">0</strong>
+		                <span>Staffs</span>
+		              </div>
+		            </div>
+		          </div>
+		          <div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
+		            <div class="block-18 text-center">
+		              <div class="text">
+		                <strong class="number" data-number="10000">0</strong>
+		                <span>Destination</span>
+		              </div>
+		            </div>
+		          </div>
+		        </div>
+	        </div>
+        </div>
+    	</div>
+    </section>
+
+	<section class="ftco-section testimony-section bg-light;" >
+		<div class="container" >
+		  <div class="row justify-content-center">
+			<div class="col-md-8 ftco-animate">
+				<div class="row ftco-animate">
+					<div class="col-md-12">
+					  <div class="carousel-testimony owl-carousel ftco-owl">
+						<div class="item">
+						  <div class="testimony-wrap py-4 pb-5">
+							<div class="user-img mb-4" style="background-image: url(images/andrea.png)">
+							  <span class="quote d-flex align-items-center justify-content-center">
+								<i class="icon-quote-left"></i>
+							  </span>
+							</div>
+							<div class="text text-center">
+							  <p class="mb-4">Un sito robusto, versatile e che permette di risparmiare moltissimo tempo!</p>
+							  <p class="name">Andrea Costa</p>
+							  <span class="position">Cliente</span>
+							</div>
+						  </div>
+						</div>
+						<div class="item">
+						  <div class="testimony-wrap py-4 pb-5">
+							<div class="user-img mb-4" style="background-image: url(images/giuseppe.jpg)">
+							  <span class="quote d-flex align-items-center justify-content-center">
+								<i class="icon-quote-left"></i>
+							  </span>
+							</div>
+							<div class="text text-center">
+							  <p class="mb-4">A prima vista molto intuitivo e semplice da utilizzare per chiunque </p>
+							  <p class="name">Giuseppe Cacciafeda</p>
+							  <span class="position">Cliente</span>
+							</div>
+						  </div>
+						</div>
+						<div class="item">
+						  <div class="testimony-wrap py-4 pb-5">
+							<div class="user-img mb-4" style="background-image: url(images/martina.jpg)">
+							  <span class="quote d-flex align-items-center justify-content-center">
+								<i class="icon-quote-left"></i>
+							  </span>
+							</div>
+							<div class="text text-center">
+							  <p class="mb-4">Sito web con uno stile semplice ma non banale, ottima scelta dei colori e degli effetti.  </p>
+							  <p class="name">Martina Milazzo</p>
+							  <span class="position">Cliente</span>
+							</div>
+						  </div>
+						</div>
+						<div class="item">
+						  <div class="testimony-wrap py-4 pb-5">
+							<div class="user-img mb-4" style="background-image: url(images/alessandro.jpg)">
+							  <span class="quote d-flex align-items-center justify-content-center">
+								<i class="icon-quote-left"></i>
+							  </span>
+							</div>
+							<div class="text text-center">
+							  <p class="mb-4"> Al pari di molti siti web, incredibile è dire poco.</p>
+							  <p class="name">Alessandro Torregrossa</p>
+							  <span class="position">Cliente</span>
+							</div>
+						  </div>
+						</div>
+					  </div>
+					</div>
+				  </div>
+			</div>
+		  </div>
+		</div>
+	  </section>
+
+    <section class="instagram">
+      <div class="container-fluid">
+        <div class="row no-gutters justify-content-center pb-5">
+          <div class="col-md-7 text-center heading-section ftco-animate">
+            <h2><span>Instagram</span></h2>
+          </div>
+        </div>
+        <div class="row no-gutters">
+          <div class="col-sm-12 col-md ftco-animate">
+            <a class="insta-img" style="background-image: url(images/insta-1.jpg);">
+              <div class="icon d-flex justify-content-center">
+                <span class="icon-instagram align-self-center"></span>
+              </div>
+            </a>
+          </div>
+          <div class="col-sm-12 col-md ftco-animate">
+            <a class="insta-img" style="background-image: url(images/insta-2.jpg);">
+              <div class="icon d-flex justify-content-center">
+                <span class="icon-instagram align-self-center"></span>
+              </div>
+            </a>
+          </div>
+          <div class="col-sm-12 col-md ftco-animate">
+            <a class="insta-img" style="background-image: url(images/insta-3.jpg);">
+              <div class="icon d-flex justify-content-center">
+                <span class="icon-instagram align-self-center"></span>
+              </div>
+            </a>
+          </div>
+          <div class="col-sm-12 col-md ftco-animate">
+            <a class="insta-img" style="background-image: url(images/insta-4.jpg);">
+              <div class="icon d-flex justify-content-center">
+                <span class="icon-instagram align-self-center"></span>
+              </div>
+            </a>
+          </div>
+          <div class="col-sm-12 col-md ftco-animate">
+            <a class="insta-img" style="background-image: url(images/insta-5.jpg);">
+              <div class="icon d-flex justify-content-center">
+                <span class="icon-instagram align-self-center"></span>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="ftco-footer ftco-bg-dark ftco-section">
+      <div class="container">
+        <div class="row mb-5">
+          <div class="col-md">
+            <div class="ftco-footer-widget mb-4">
+              <h2 class="ftco-heading-2">Maag</h2>
+              <p>Maag è un'agenzia di viaggi online per le prenotazioni di alloggi.
+                 Il sito offre una scelta ampissima, con oltre 100.000 alloggi in tutta Italia.
+                 Trovare un'offerta vantaggiosa con Maag è davvero semplice: basta un click per prenotare la tua vacanza personalizzata.
+                 È di proprietà ed è gestito dal Team Maag con sede a Palermo</p>
+                 <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
+                  <li class="ftco-animate"><a href="https://twitter.com/Maag06755356" target="_blank"><span class="icon-twitter"></span></a></li>
+                  <li class="ftco-animate"><a href="https://www.facebook.com/Maag-108011384314882/?ref=page_internal" target="_blank"><span class="icon-facebook"></span></a></li>
+                  <li class="ftco-animate"><a href="https://www.instagram.com/maag1920/" target="_blank"><span class="icon-instagram"></span></a></li>
+                 </ul>
+            </div>
+          </div>
+          <div class="col-md">
+            <div class="ftco-footer-widget mb-4 ml-md-5">
+              <h2 class="ftco-heading-2">Info utili</h2>
+              <p>Clicca sul pulsante registrati che trovi in alto nella pagina, compila il form, e sei subito dei nostri</p>
+              <p>Sei nel posto giusto, inserire la propria struttura è del tutto gratuito, comincia subito a fare affari con un semplice click.</p>
+              <p>Quando sei indeciso sulla prenotazione di una struttura, dai sempre un'occhiata alle recensioni, potrebbero aiutarti nella tua scelta </p>
+            </div>
+          </div>
+          <div class="col-md">
+             <div class="ftco-footer-widget mb-4">
+              <h2 class="ftco-heading-2">Privacy</h2>
+              <p>I tuoi dati sono al sicuro, protetti con la tecnologia HTTPS che garantisce una completa cifratura dei tuoi dati sensibili </p>
+            </div>
+          </div>
+          <div class="col-md">
+            <div class="ftco-footer-widget mb-4">
+            	<h2 class="ftco-heading-2">Hai domande? Contattaci</h2>
+            	<div class="block-23 mb-3">
+				  <ul>
+					<li><p><span class="icon icon-envelope"></span><a class="text" href="mailto:martinamilazzo@gmail.com">Martina Milazzo</a></p></li>
+                  	<li><p><span class="icon icon-envelope"></span><a class="text" href="mailto:alextorre95@gmail.com">Alessandro Torregrossa</a></p></li>
+                  	<li><p><span class="icon icon-envelope"></span><a class="text" href="mailto:fixdo97@libero.it">Andrea Costa</a></p></li>
+                  	<li><p><span class="icon icon-envelope"></span><a class="text" href="mailto:giuseppecacciafeda98@libero.it">Giuseppe Cacciafeda</a></p></li>
+	              </ul>
+	            </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <p>Copyright &copy;<script>document.write(new Date().getFullYear());</script> Tutti i diritti riservati dal Team Maag</p>
+            <p>Corso di laurea : Ingegneria Informatica, Università degli studi di Palermo, Sicilia </p>
+          </div>
+        </div>
+      </div>
+	</footer>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+	<%- include('../script/Campi.ejs') %>
+	<%- include('../script/Alert.ejs') %>
+	<%- include('../script/IndexJS.ejs') %>
+	<%- include('../script/ControlloData.ejs') %>
+  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+
+  </body>
+</html>

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Valuta Struttura</title>
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i" rel="stylesheet">
+    <link rel="stylesheet" href="../../public/stylesheets/css/valuta/css/valuta.css" type="text/css">
+    <link rel="stylesheet" href="../../public/stylesheets/css/dettaglio/star.css" type="text/css">
+    <link rel="stylesheet" href="../../public/stylesheets/css/admin/sb-admin-2.css" type="text/css">
+    <link rel="stylesheet" href="../public/stylesheets/css/index/css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="../../public/stylesheets/css/admin/gestioneRichieste/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="../../public/stylesheets/css/admin/gestioneRichieste/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="../../public/stylesheets/css/admin/gestioneRichieste/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="../../public/stylesheets/css/admin/gestioneRichieste/jquery-ui.min.css" type="text/css">
+    <link rel="stylesheet" href="../../public/stylesheets/css/admin/gestioneRichieste/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="../../public/stylesheets/css/admin/gestioneRichieste/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="../../public/stylesheets/css/admin/gestioneRichieste/style.css" type="text/css">
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    <%- include('../../script/Stelle.ejs') %>
+
+</head>
+
+<body onload="CaricaRecensione();" style="background-color:white">
+
+
+
+  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark "  id="ftco-navbar" style=" box-shadow: 2px 2px 2px 2px lightgray; font-family:'Poppins', Arial, sans-serif;">
+    <div class="container">
+      <a class="navbar-brand"  href="/">Maag</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="oi oi-menu"></span> Menu
+      </button>
+      <div class="collapse navbar-collapse" id="ftco-nav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a href="/cronologiaPrenotazioni"  onmouseover="this.style.textDecoration='underline';"  onmouseout="this.style.textDecoration='none'"  method = "GET" class="nav-link">Cronologia Prenotazioni </a>
+          </li>
+        <li class="nav-item active">
+          <a href="#" data-toggle="modal"  onmouseover="this.style.textDecoration='underline';"  onmouseout="this.style.textDecoration='none'" data-target="#logoutModal" class="nav-link">Logout</a>
+        </li>
+    </ul>
+      </div>
+    </div>
+  </nav>
+        <section class="rooms spad" >
+            <%struttura.forEach(function(struttura){%>
+              <form action="/inserisciRecensione" method="POST" >
+                <div class="container">
+                  <h2><%=struttura.nome_str%></h2>
+                    <div class="row" style="text-align:center;">
+                        <div class="col-lg-6 p-0 order-lg-3 order-md-3 col-md-6">
+                            <div class="room__pic__slider owl-carousel">
+                                <div class="room__pic__item set-bg" data-setbg="../../public/images/filesystem/<%=struttura.nome_imm1%>"></div>
+                                <div class="room__pic__item set-bg" data-setbg="../../public/images/filesystem/<%=struttura.nome_imm2%>"></div>
+                                <div class="room__pic__item set-bg" data-setbg="../../public/images/filesystem/<%=struttura.nome_imm3%>"></div>
+                                <div class="room__pic__item set-bg" data-setbg="../../public/images/filesystem/<%=struttura.nome_imm4%>"></div>
+                                <div class="room__pic__item set-bg" data-setbg="../../public/images/filesystem/<%=struttura.nome_imm5%>"></div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 p-0 order-lg-4 order-md-4 col-md-6">
+                            <div class="room__text right__text" >
+                              <input type="hidden" name ="nome_str" value='<%=struttura.nome_str%>'></input>
+                              <input type="hidden" name ="ref_prop" value='<%=struttura.ref_prop%>'></input>
+                              <div class="wrap-input100 validate-input" data-validate = "La descrizione della struttura è richiesta">
+                                <span class="label-input100">Punteggio</span>
+                              <span class="focus-input100"></span>
+                                <div class="form-group" style="justify-content: center; display: flex;">
+                                  <fieldset class="rating" required>
+                                    <input type="radio" id="star5" name="punteggio" value="5" /><label class = "full" for="star5" title="Eccezionale - 5 stelle"></label>
+                                    <input type="radio" id="star4" name="punteggio" value="4" /><label class = "full" for="star4" title="Soddisfacente - 4 stelle"></label>
+                                    <input type="radio" id="star3" name="punteggio" value="3" /><label class = "full" for="star3" title="Discreta- 3 stelle"></label>
+                                    <input type="radio" id="star2" name="punteggio" value="2" /><label class = "full" for="star2" title="Mediocre - 2 stelle"></label>
+                                    <input type="radio" id="star1" name="punteggio" value="1" /><label class = "full" for="star1" title="Pessima - 1 stella"></label>
+                                  </fieldset>
+                                </div>
+                              </div>
+                                <br>
+                                <div class="form-group">
+                                <br>
+                                <div class="wrap-input100 validate-input" data-validate = "La descrizione della struttura è richiesta">
+                                  <span class="label-input100">Recensione</span>
+                                  <textarea class="input100" name="commento" id="descrizione" maxlength="500" required></textarea>
+                                  <span class="focus-input100"></span>
+                                </div>
+                              </div>
+                                <button class="contact100-form-btn" style="float: right;" value="1" type="submit" name="conferma" id="conferma">Invia <i class="fas fa-paper-plane"></i> </button>
+                              </div>
+                            </div>
+                          </form>
+            <%}); %>
+          </section>
+
+
+          <div class="recensioni " >
+            <h2 class="testo mb-4" >Recensioni</h2>
+          <% recensione.forEach(function(recensione, stella){%>
+            <div class="recensioniItem container-fluid"  >
+              <h6><%= recensione.ref_client %></h6>
+              <p id="valutazione"></p> <script type="text/javascript">Stella(<%=recensione.punteggio%>)</script>
+              <p id="commento"></p><%=recensione.commento%>
+            </div>
+            <%}); %>
+          </div>
+
+          <footer class="ftco-footer ftco-bg-dark ftco-section">
+            <div class="container">
+              <div class="row mb-5">
+              <div class="col-md">
+                <div class="ftco-footer-widget mb-4">
+                <h2 class="ftco-heading-2">Maag</h2>
+                <p>Maag è un'agenzia di viaggi online per le prenotazioni di alloggi.
+                   Il sito offre una scelta ampissima, con oltre 100.000 alloggi in tutta Italia.
+                   Trovare un'offerta vantaggiosa con Maag è davvero semplice: basta un click per prenotare la tua vacanza personalizzata.
+                   È di proprietà ed è gestito dal Team Maag con sede a Palermo</p>
+                   <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
+                     <li class="ftco-animate"><a href="https://twitter.com/Maag06755356" target="_blank"><span class="icon-twitter"></span></a></li>
+                     <li class="ftco-animate"><a href="https://www.facebook.com/Maag-108011384314882/?ref=page_internal" target="_blank"><span class="icon-facebook"></span></a></li>
+                     <li class="ftco-animate"><a href="https://www.instagram.com/maag1920/" target="_blank"><span class="icon-instagram"></span></a></li>
+                </ul>
+                </div>
+              </div>
+              <div class="col-md">
+                <div class="ftco-footer-widget mb-4 ml-md-5">
+                <h2 class="ftco-heading-2">Info utili</h2>
+                <p>Clicca sul pulsante registrati che trovi in alto nella pagina, compila il form, e sei subito dei nostri</p>
+                <p>Sei nel posto giusto, inserire la propria struttura è del tutto gratuito, comincia subito a fare affari con un semplice click.</p>
+                <p>Quando sei indeciso sulla prenotazione di una struttura, dai sempre un'occhiata alle recensioni, potrebbero aiutarti nella tua scelta </p>
+                </div>
+              </div>
+              <div class="col-md">
+                 <div class="ftco-footer-widget mb-4">
+                <h2 class="ftco-heading-2">Privacy</h2>
+                <p>I tuoi dati sono al sicuro, protetti con la tecnologia HTTPS che garantisce una completa cifratura dei tuoi dati sensibili </p>
+                </div>
+              </div>
+              <div class="col-md">
+                <div class="ftco-footer-widget mb-4">
+                  <h2 class="ftco-heading-2">Hai domande? Contattaci</h2>
+                  <div class="block-23 mb-3">
+                  <ul>
+                    <li><p><span class="icon icon-envelope"></span><a class="text" href="mailto:martinamilazzo@gmail.com">Martina Milazzo</a></p></li>
+                    <li><p><span class="icon icon-envelope"></span><a class="text" href="mailto:alextorre95@gmail.com">Alessandro Torregrossa</a></p></li>
+                    <li><p><span class="icon icon-envelope"></span><a class="text" href="mailto:fixdo97@libero.it">Andrea Costa</a></p></li>
+                    <li><p><span class="icon icon-envelope"></span><a class="text" href="mailto:giuseppecacciafeda98@libero.it">Giuseppe Cacciafeda</a></p></li>
+                  </ul>
+                  </div>
+                </div>
+              </div>
+              </div>
+              <div class="row">
+              <div class="col-md-12 text-center">
+                <p>Copyright &copy;<script>document.write(new Date().getFullYear());</script> Tutti i diritti riservati dal Team Maag</p>
+                <p>Corso di laurea : Ingegneria Informatica, Università degli studi di Palermo, Sicilia </p>
+              </div>
+              </div>
+            </div>
+            </footer>
+
+            <%- include('../../script/Alert.ejs') %>
+
+            <!-- Logout Modal-->
+            <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Pronto ad andartene?</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                        </div>
+                        <div class="modal-body">Seleziona "Logout" per terminare la sessione corrente.</div>
+                        <div class="modal-footer">
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                        <a class="btn btn-primary" href="/LogoutCliente">Logout</a>
+                        </div>
+                    </div>
+                </div>
+
+
+
+    <%- include('../../script/CaricaRecensione.ejs') %>
+
+    <script src="../../public/js/admin/gestioneRichieste/jquery-3.3.1.min.js"></script>
+    <script src="../../public/js/admin/gestioneRichieste/bootstrap.min.js"></script>
+    <script src="../../public/js/admin/gestioneRichieste/jquery.nice-select.min.js"></script>
+    <script src="../../public/js/admin/gestioneRichieste/jquery-ui.min.js"></script>
+    <script src="../../public/js/admin/gestioneRichieste/jquery.slicknav.js"></script>
+    <script src="../../public/js/admin/gestioneRichieste/owl.carousel.min.js"></script>
+    <script src="../../public/js/admin/gestioneRichieste/main.js"></script>
+    <script src="../../public/stylesheets/css/valuta/js/carosello.js"></script>
+
+</body>
+</html>

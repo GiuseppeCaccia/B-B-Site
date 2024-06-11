@@ -1,0 +1,69 @@
+<script>
+    // Set new default font family and font color to mimic Bootstrap's default styling
+Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
+Chart.defaults.global.defaultFontColor = '#858796';
+
+
+function GraficoTorta(nome_str){
+  let postiDisponibili = 0;
+  let postiOccupati = 0;
+  let postiPrenotati = 0;
+  var oggi = new Date();
+  <% guadagni.forEach(function(guadagni){%>
+
+    var arrivo = '<%=guadagni.data_arr%>'.split('/');
+    var data_arrivo = new Date(arrivo[2], arrivo[1] - 1, arrivo[0]);
+    var ritorno = '<%=guadagni.data_rit%>'.split('/');
+    var data_ritorno = new Date(ritorno[2], ritorno[1] - 1, ritorno[0]);
+
+    if(nome_str == "<%=guadagni.nome_str%>" && <%=guadagni.pagato%> == 0){
+      postiPrenotati = postiPrenotati + <%=guadagni.ospitiPrenotati%> || 0;
+    }
+    if(nome_str == "<%=guadagni.nome_str%>" && <%=guadagni.pagato%> == 1 && oggi >= data_arrivo && oggi <= data_ritorno){
+      postiOccupati = postiOccupati + <%=guadagni.ospitiPrenotati%> || 0;
+    }
+  <%}); %>
+
+  <% struttura.forEach(function(struttura){%>
+    if(nome_str == "<%=struttura.nome_str%>"){
+    postiDisponibili = <%=struttura.num_ospiti%>;
+    }
+  <%}); %>
+
+  postiDisponibili = postiDisponibili - postiOccupati;
+
+  $("canvas#myPieChart").remove();
+  $("div.chart-pie").append('<canvas id="myPieChart"></canvas>');
+  document.getElementById('graficoTorta').innerHTML = "Ospiti: " + nome_str;
+  var ctx = document.getElementById("myPieChart");
+  var myPieChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: ["Posti Occupati", "Posti Disponibili", "Posti Prenotati"],
+      datasets: [{
+        data: [postiOccupati, postiDisponibili, postiPrenotati],
+        backgroundColor: ['#e74a3b', '#1cc88a', '#36b9cc'],
+        hoverBackgroundColor: ['#e74a3b', '#17a673', '#2c9faf'],
+        hoverBorderColor: "rgba(234, 236, 244, 1)",
+      }],
+    },
+    options: {
+      maintainAspectRatio: false,
+      tooltips: {
+        backgroundColor: "rgb(255,255,255)",
+        bodyFontColor: "#858796",
+        borderColor: '#dddfeb',
+        borderWidth: 1,
+        xPadding: 15,
+        yPadding: 15,
+        displayColors: false,
+        caretPadding: 10,
+      },
+      legend: {
+        display: false
+      },
+      cutoutPercentage: 80,
+    },
+  });
+}
+</script>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Hiroto Template">
+    <meta name="keywords" content="Hiroto, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Rendiconto Trimestrale</title>
+    
+    <link rel="stylesheet" href="../../public/stylesheets/css/admin/sb-admin-2.css">
+    <link rel="stylesheet" href="../../public/stylesheets/css/admin/gestioneRichieste/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="../../public/stylesheets/css/admin/gestioneRichieste/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="../../public/stylesheets/css/admin/gestioneRichieste/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="../../public/stylesheets/css/admin/gestioneRichieste/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="../../public/stylesheets/css/admin/gestioneRichieste/jquery-ui.min.css" type="text/css">
+    <link rel="stylesheet" href="../../public/stylesheets/css/admin/gestioneRichieste/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="../../public/stylesheets/css/admin/gestioneRichieste/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="../../public/stylesheets/css/admin/gestioneRichieste/style.css" type="text/css">
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+
+    <script>
+      function rendicontoButton(data_rendiconto_successivo){
+        var oggi = new Date();
+        var data_rendiconto = data_rendiconto_successivo.split("/");
+        var myDate = new Date(data_rendiconto[2], data_rendiconto[1] - 1, data_rendiconto[0]);
+          if(oggi >= myDate){
+            document.write('<button class="contact100-form-btn" type="submit" name="conferma" id="rifiuta">Invia Rendiconto<i class="fas fa-paper-plane"></i> </button>');
+          }
+          else{
+            document.write('<button class="contact100-form-btn" type="submit" name="conferma" id="rifiuta" disabled>Invia Rendiconto<i class="fas fa-paper-plane"></i> </button>');
+          }
+      }
+</script>
+
+</head>
+
+<body id="page-top">
+  <div id="wrapper">
+      <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/indexProprietario">
+          <div class="sidebar-brand-icon rotate-n-15">
+            <i class="fas fa-cog"></i>
+          </div>
+          <div class="sidebar-brand-text mx-3">Benvenuto</div>
+        </a>
+        <!-- Divider -->
+        <hr class="sidebar-divider my-0">
+  
+        <!-- Nav Item - Dashboard -->
+        <li class="nav-item">
+          <a class="nav-link" href="/indexProprietario">
+            <i class="far fa-address-book"></i>
+            <span>Home</span></a>
+        </li>
+  
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+  
+        <!-- Heading -->
+        <div class="sidebar-heading">
+          Strumenti
+        </div>
+        <li class="nav-item">
+          <a class="nav-link" href="/inserimentoStruttura" method="GET">
+            <i class="fas fa-home"></i>
+            <span>Inserimento Struttura</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/selezioneModificaStruttura" method="GET">
+            <i class="fas fa-hammer"></i>
+            <span>Modifica Struttura</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/gestioneRichieste" method="GET">
+            <i class="far fa-comments"></i>
+            <span>Gestione Richieste</span>
+          </a>
+        </li>
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+  
+        <!-- Heading -->
+        <div class="sidebar-heading">
+          Servizi Esterni
+        </div>
+        <!-- Nav Item - Charts -->
+        <li class="nav-item">
+          <a class="nav-link" href="/datiOspite" method="GET">
+            <i class="far fa-address-card"></i>
+            <span>Comunicazione Ospiti</span></a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="/rendicontoTrimestrale" method="GET">
+            <i class="fas fa-angle-right"></i>
+            <span>Rendiconto Trimestrale</span></a>
+        </li>
+        <hr class="sidebar-divider d-none d-md-block">
+        <div class="text-center d-none d-md-inline">
+          <button class="rounded-circle border-0" id="sidebarToggle"></button>
+        </div>
+      </ul>
+  
+      <div id="content-wrapper" class="d-flex flex-column">
+          <%- include('../../script/NavbarProp.ejs') %>
+
+          <% struttura.forEach(function(struttura){%>
+            <form action="/invioRendiconto" method="POST">
+              <section class="rooms spad">
+                      <div class="container">
+                          <div class="row">
+                              <div class="col-lg-6 p-0 order-lg-3 order-md-3 col-md-6">
+                                  <div class="room__pic__slider owl-carousel">
+                                      <div class="room__pic__item set-bg" data-setbg="../../public/images/filesystem/<%=struttura.nome_imm1%>"></div>
+                                      <div class="room__pic__item set-bg" data-setbg="../../public/images/filesystem/<%=struttura.nome_imm2%>"></div>
+                                      <div class="room__pic__item set-bg" data-setbg="../../public/images/filesystem/<%=struttura.nome_imm3%>"></div>
+                                      <div class="room__pic__item set-bg" data-setbg="../../public/images/filesystem/<%=struttura.nome_imm4%>"></div>
+                                      <div class="room__pic__item set-bg" data-setbg="../../public/images/filesystem/<%=struttura.nome_imm5%>"></div>
+                                  </div>
+                              </div>
+                              <div class="col-lg-6 p-0 order-lg-4 order-md-4 col-md-6">
+                                  <div class="room__text right__text">
+                                      <h3><%=struttura.nome_str%></h3>
+                                      <h2><sup>Data ultimo rendiconto</sup></h2><br>
+                                      <h2><%=struttura.data_rendiconto%></h2>
+                                      <h2><sup>Data prossimo rendiconto</sup></h2><br>
+                                      <h2><%=struttura.data_rendiconto_successivo%></h2>
+                                      <input type="hidden" name="nome_str" value="<%=struttura.nome_str%>"></input>
+                                      <input type="hidden" name="data_rendiconto_precendente" value="<%=struttura.data_rendiconto%>"></input>
+                                      <input type="hidden" name="data_rendiconto_successivo" value="<%=struttura.data_rendiconto_successivo%>"></input>
+                                      <script type="text/javascript">rendicontoButton('<%=struttura.data_rendiconto_successivo%>')</script>
+                                    </div>
+                                  </div>
+                            </div>
+                        </div>      
+                </section>
+              </form>
+          <%}); %>
+          <footer class="sticky-footer bg-white" style="margin-top: 32vw;">
+            <div class="container my-auto">
+              <div class="copyright text-center my-auto">
+                <span>Copyright &copy; Team Maag 2020</span>
+              </div>
+            </div>
+          </footer>
+       </div>
+    </div>
+
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+    </a>
+
+    <%- include('../../script/LogoutProp.ejs') %>
+    <%- include('../../script/Alert.ejs') %>
+    <%- include('../../script/ProprietarioJS.ejs') %>
+    <script src="../../public/js/admin/gestioneRichieste/jquery-3.3.1.min.js"></script>
+    <script src="../../public/js/admin/gestioneRichieste/bootstrap.min.js"></script>
+    <script src="../../public/js/admin/gestioneRichieste/jquery.nice-select.min.js"></script>
+    <script src="../../public/js/admin/gestioneRichieste/jquery-ui.min.js"></script>
+    <script src="../../public/js/admin/gestioneRichieste/jquery.slicknav.js"></script>
+    <script src="../../public/js/admin//gestioneRichieste/owl.carousel.min.js"></script>
+    <script src="../../public/js/admin/gestioneRichieste/main.js"></script>
+</body>
+</html>

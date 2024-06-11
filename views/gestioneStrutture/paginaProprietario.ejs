@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Pagina Proprietario</title>
+
+  <%- include('../../script/ProprietarioCSS.ejs') %>
+  <%- include('../../script/Stelle.ejs') %>
+
+  <script>
+    var nome_str_uno = ""
+    <% if (struttura[0] != undefined) { %>
+    nome_str_uno = ('<%=struttura[0].nome_str%>');
+    <% } %>
+  </script>
+
+</head>
+
+<body id="page-top" onload="CalcoloDati();GraficoLinea(nome_str_uno);GraficoTorta(nome_str_uno);">
+
+  <!-- Page Wrapper -->
+  <div id="wrapper">
+
+    <!-- Sidebar -->
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+      <!-- Sidebar - Brand -->
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/indexProprietario">
+        <div class="sidebar-brand-icon rotate-n-15">
+          <i class="fas fa-cog"></i>
+        </div>
+        <div class="sidebar-brand-text mx-3">Benvenuto</div>
+      </a>
+      <!-- Divider -->
+      <hr class="sidebar-divider my-0">
+
+      <!-- Nav Item - Dashboard -->
+      <li class="nav-item active">
+        <a class="nav-link" href="/indexProprietario">
+          <i class="fas fa-angle-right"></i>
+          <span>Home</span></a>
+      </li>
+
+      <!-- Divider -->
+      <hr class="sidebar-divider">
+
+      <!-- Heading -->
+      <div class="sidebar-heading">
+        Strumenti
+      </div>
+      <li class="nav-item">
+        <a class="nav-link" href="/inserimentoStruttura" method="GET">
+          <i class="fas fa-home"></i>
+          <span>Inserimento Struttura</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/selezioneModificaStruttura" method="GET">
+          <i class="fas fa-hammer"></i>
+          <span>Modifica Struttura</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/gestioneRichieste" method="GET">
+          <i class="far fa-comments"></i>
+          <span>Gestione Richieste</span>
+        </a>
+      </li>
+      <!-- Divider -->
+      <hr class="sidebar-divider">
+
+      <!-- Heading -->
+      <div class="sidebar-heading">
+        Servizi Esterni
+      </div>
+      <!-- Nav Item - Charts -->
+      <li class="nav-item">
+        <a class="nav-link" href="/datiOspite" method="GET">
+          <i class="far fa-address-card"></i>
+          <span>Comunicazione Ospiti</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/rendicontoTrimestrale" method="GET">
+          <i class="fas fa-fw fa-table"></i>
+          <span>Rendiconto Trimestrale</span></a>
+      </li>
+
+      <!-- Divider -->
+      <hr class="sidebar-divider d-none d-md-block">
+
+      <!-- Sidebar Toggler (Sidebar) -->
+      <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+      </div>
+
+    </ul>
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+      <!-- Main Content -->
+      <div id="content">
+
+        <%- include('../../script/NavbarProp.ejs') %>
+
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+          <!-- Content Row -->
+          <div class="row">
+            <div class="col-xl-3 col-md-6 mb-4">
+              <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Guadagni (Mensili)</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800" id="guadagni_mensili"></div>
+                    </div>
+                    <div class="col-auto">
+                      <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-xl-3 col-md-6 mb-4">
+              <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Guadagni (Annuali)</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800" id="guadagni_annuali"></div>
+                    </div>
+                    <div class="col-auto">
+                      <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-xl-3 col-md-6 mb-4">
+              <div class="card border-left-info shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Strutture Possedute</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800" id="strutture_possedute"></div>
+                    </div>
+                    <div class="col-auto">
+                      <i class="fas fa-home fa-2x text-gray-300"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-xl-3 col-md-6 mb-4">
+              <div class="card border-left-warning shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Richieste in Sospeso</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800" id="richieste_sospeso"></div>
+                    </div>
+                    <div class="col-auto">
+                      <i class="fas fa-comments fa-2x text-gray-300"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+
+            <!-- Area Chart -->
+            <div class="col-xl-8 col-lg-7">
+              <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                  <h6 class="m-0 font-weight-bold text-primary" id="grafico"></h6>
+                  <div class="dropdown no-arrow">
+                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+                      aria-haspopup="true" aria-expanded="false">
+                      <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                      aria-labelledby="dropdownMenuLink">
+                      <div class="dropdown-header">Strutture:</div>
+                      <% struttura.forEach(function(struttura){%>
+                      <a class="dropdown-item" href="#" onclick="GraficoLinea('<%=struttura.nome_str%>');GraficoTorta('<%=struttura.nome_str%>');">
+                        <%=struttura.nome_str%></a>
+                      <%}); %>
+                    </div>
+                  </div>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                  <div class="chart-area">
+                    <canvas id="myAreaChart"></canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Pie Chart -->
+            <div class="col-xl-4 col-lg-5">
+              <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                  <h6 class="m-0 font-weight-bold text-primary" id="graficoTorta">Ospiti</h6>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                  <div class="chart-pie pt-4 pb-2">
+                    <canvas id="myPieChart"></canvas>
+                  </div>
+                  <div class="mt-4 text-center small">
+                    <span class="mr-2">
+                      <i class="fas fa-circle text-danger"></i> Posti Occupati
+                    </span>
+                    <span class="mr-2">
+                      <i class="fas fa-circle text-success"></i> Posti Disponibili
+                    </span>
+                    <span class="mr-2">
+                      <i class="fas fa-circle text-info"></i> Posti Prenotati
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Content Row -->
+          <section class="ftco-section bg-light">
+            <div class="container">
+              <div class="row justify-content-center mb-5 pb-3">
+                <div class="col-md-7 heading-section text-center ftco-animate">
+                  <h2 class="mb-4">Le tue strutture</h2>
+                </div>
+              </div>
+              <div class="rowProp">
+                <% struttura.forEach(function(struttura){%>
+                <input type="hidden" name="nome_str" value="<%=struttura.nome_str%>">
+                <div class="col-sm col-md-6 col-lg-4 ftco-animate">
+                  <div class="room">
+                    <a class="img d-flex justify-content-center align-items-center"
+                      style="background-image: url(../public/images/filesystem/<%=struttura.nome_imm1%>);">
+                      <div class="icon d-flex justify-content-center align-items-center">
+                        <span class="icon-search2"></span>
+                      </div>
+                    </a>
+                    <div class="text p-3 text-center">
+                      <%=struttura.tipologia%>
+                      <h3 class="mb-3"><%=struttura.nome_str%></h3>
+                      <% if (struttura.tipologia == "Casa Vacanza") { %>
+                        <p><span class="price mr-2"><%=struttura.prezzo%>€</span> <span class="per">per notte</span></p>
+                      <% }
+              			  else { %>
+                        <p><span class="price mr-2"><%=struttura.prezzo%>€</span> <span class="per">per persona</span></p>
+                       <% } %>
+                      <p id="valutazione"> </p>
+                      <script type="text/javascript">Stella(<%=struttura.valutazione_struttura%>)</script>
+                      <p id="stelline" style="color: #FFBF00; "></p>
+                      <hr>
+                      <form action ="/strutturaDettaglio" method="POST">
+                        <p class="pt-1"><button type="submit" name="nome_str" value="<%=struttura.nome_str%>" class="btn-custom">Visualizzala in dettaglio <i class="fas fa-plus"></i></a></p>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+                <%}); %>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <!-- /.container-fluid -->
+
+      </div>
+      <!-- End of Main Content -->
+
+      <!-- Footer -->
+      <footer class="sticky-footer bg-white">
+        <div class="container my-auto">
+          <div class="copyright text-center my-auto">
+            <span>Copyright &copy; Team Maag 2020</span>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
+
+  <%- include('../../script/LogoutProp.ejs') %>
+  <%- include('../../script/Alert.ejs') %>
+  <%- include('../../script/ProprietarioJS.ejs') %>
+  <%- include('../../script/CalcoloDati.ejs') %>
+  <%- include('../../script/GraficoLinea.ejs') %>
+  <%- include('../../script/GraficoTorta.ejs') %>
+
+</body>
+</html>

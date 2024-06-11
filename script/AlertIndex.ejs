@@ -1,0 +1,15 @@
+<% if(errormessage) { %>
+	<div style="display : none;">
+		<a id="alertB" href="#popup1"></a>
+	</div>
+	<div id="popup1" class="overlay">
+	<div class="popup">
+		<h2>Attenzione!</h2>
+		<a class="close" href="#">&times;</a>
+		<div class="content">
+			<%=errormessage%>
+		</div>
+	</div>
+	</div>
+	<script>document.getElementById("alertB").click();</script>
+<% } %> 

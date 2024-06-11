@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Modifica Struttura</title>
+  <%- include('../../script/ProprietarioCSS.ejs') %>
+  <%- include('../../script/Stelle.ejs') %>
+</head>
+
+<body id="page-top">
+  <!-- Page Wrapper -->
+  <div id="wrapper">
+    <!-- Sidebar -->
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+      <!-- Sidebar - Brand -->
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/indexProprietario">
+        <div class="sidebar-brand-icon rotate-n-15">
+          <i class="fas fa-cog"></i>
+        </div>
+        <div class="sidebar-brand-text mx-3">Benvenuto</div>
+      </a>
+      <!-- Divider -->
+      <hr class="sidebar-divider my-0">
+
+      <!-- Nav Item - Dashboard -->
+      <li class="nav-item">
+        <a class="nav-link" href="/indexProprietario">
+          <i class="far fa-address-book"></i>
+          <span>Home</span></a>
+      </li>
+
+      <!-- Divider -->
+      <hr class="sidebar-divider">
+
+      <!-- Heading -->
+      <div class="sidebar-heading">
+        Strumenti
+      </div>
+      <li class="nav-item">
+        <a class="nav-link" href="/inserimentoStruttura" method="GET">
+          <i class="fas fa-home"></i>
+          <span>Inserimento Struttura</span>
+        </a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="/selezioneModificaStruttura" method="GET">
+          <i class="fas fa-angle-right"></i>
+          <span>Modifica Struttura</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/gestioneRichieste" method="GET">
+          <i class="far fa-comments"></i>
+          <span>Gestione Richieste</span>
+        </a>
+      </li>
+      <!-- Divider -->
+      <hr class="sidebar-divider">
+
+      <!-- Heading -->
+      <div class="sidebar-heading">
+        Servizi Esterni
+      </div>
+      <!-- Nav Item - Charts -->
+      <li class="nav-item">
+        <a class="nav-link" href="/datiOspite" method="GET">
+          <i class="far fa-address-card"></i>
+          <span>Comunicazione Ospiti</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/rendicontoTrimestrale" method="GET">
+          <i class="fas fa-fw fa-table"></i>
+          <span>Rendiconto Trimestrale</span></a>
+      </li>
+
+      <!-- Divider -->
+      <hr class="sidebar-divider d-none d-md-block">
+
+      <!-- Sidebar Toggler (Sidebar) -->
+      <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+      </div>
+
+    </ul>
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+      <!-- Main Content -->
+      <div id="content">
+
+        <%- include('../../script/NavbarProp.ejs') %>
+
+        <!-- Begin Page Content -->
+        <div class="container-fluid" >
+          <section class="ftco-section bg-light">
+            <div class="container">
+              <div class="row justify-content-center mb-5 pb-3">
+                <div class="col-md-7 heading-section text-center ftco-animate">
+                  <h2 class="mb-4">Seleziona la struttura da modificare</h2>
+                </div>
+              </div>
+              <div class="row" >
+                <% struttura.forEach(function(struttura){%>
+                <div class="col-sm col-md-6 col-lg-4 ftco-animate"  >
+                  <div class="room">
+                    <a class="img d-flex justify-content-center align-items-center"
+                      style="background-image: url(../public/images/filesystem/<%=struttura.nome_imm1%>);">
+                      <div class="icon d-flex justify-content-center align-items-center">
+                        <span class="icon-search2"></span>
+                      </div>
+                    </a>
+                    <div class="text p-3 text-center">
+                      <%=struttura.tipologia%>
+                      <h3 class="mb-3"><%=struttura.nome_str%></h3>
+                      <% if (struttura.tipologia == "Casa Vacanza") { %>
+                        <p><span class="price mr-2"><%=struttura.prezzo%>€</span> <span class="per">per notte</span></p>
+                      <% }
+              			  else { %>
+                        <p><span class="price mr-2"><%=struttura.prezzo%>€</span> <span class="per">per persona</span></p>
+                       <% } %>
+                      <p id="valutazione"> </p>
+                      <script type="text/javascript">Stella(<%=struttura.valutazione_struttura%>)</script>
+                      <p id="stelline" style="color: #FFBF00; "></p>
+                      <hr>
+                      <div class="row" style="display: flex; justify-content: center;">
+                      <a class="btn  btn-danger btn-lg active" role="button" style="margin-right: 5px;" aria-pressed="true" data-toggle="modal"  data-target="#eliminaStruttura" onclick="nomeStruttura('<%=struttura.nome_str%>');"><i class="fas fa-trash-alt"></i></a>
+                      <form action="/modificaStruttura" method="GET">
+                      <input type="hidden" name="nome_str" value='<%=struttura.nome_str%>'/>
+                      <button class="btn btn-success btn-lg active" type="submit">Modifica</button>
+                      </form>
+                    </div>
+                  </div>
+                  </div>
+                </div>
+                <%}); %>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <!-- /.container-fluid -->
+
+      </div>
+      <!-- End of Main Content -->
+
+      <!-- Footer -->
+      <footer class="sticky-footer bg-white">
+        <div class="container my-auto">
+          <div class="copyright text-center my-auto">
+            <span>Copyright &copy; Team Maag 2020</span>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
+
+
+  <div class="modal fade" id="eliminaStruttura" tabindex="-2" role="dialog" aria-labelledby="elimina"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Attenzione!</h5>
+        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body" id="elimina"></div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+        <form action="/EliminaStruttura" method="POST">
+        <input type="hidden" value="" name="nome_str" id="buttonElimina">
+        <button type="submit" class="btn btn-danger">Elimina</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include('../../script/LogoutProp.ejs') %>
+<%- include('../../script/Alert.ejs') %>
+<%- include('../../script/Alert.ejs') %>
+<script>
+  function nomeStruttura(nome_struttura){
+    document.getElementById("elimina").innerHTML = "Clicca il tasto elimina per eliminare la seguente struttura definitivamente: " + nome_struttura;
+    document.getElementById("buttonElimina").value = nome_struttura;
+  }
+</script>
+
+  <%- include('../../script/ProprietarioJS.ejs') %>
+</body>
+</html>

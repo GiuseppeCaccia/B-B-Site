@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Modifica Struttura</title>
+    <link rel="stylesheet" href="../../public/stylesheets/css/admin/inserimentoStruttura/main.css">
+	<link rel="stylesheet" type="text/css" href="../../public/stylesheets/css/admin/inserimentoStruttura/button.css">
+	<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+	<link rel="stylesheet" href="../../public/stylesheets/css/admin/sb-admin-2.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+</head>
+<body id="page-top">
+  <div id="wrapper">
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+		<a class="sidebar-brand d-flex align-items-center justify-content-center" href="/indexProprietario">
+			<div class="sidebar-brand-icon rotate-n-15">
+			  <i class="fas fa-cog"></i>
+			</div>
+			<div class="sidebar-brand-text mx-3">Benvenuto</div>
+		  </a>
+		  <!-- Divider -->
+		  <hr class="sidebar-divider my-0">
+
+		  <!-- Nav Item - Dashboard -->
+		  <li class="nav-item">
+			<a class="nav-link" href="/indexProprietario">
+			  <i class="far fa-address-book"></i>
+			  <span>Home</span></a>
+		  </li>
+
+		  <!-- Divider -->
+		  <hr class="sidebar-divider">
+
+		  <!-- Heading -->
+		  <div class="sidebar-heading">
+			Strumenti
+		  </div>
+		  <li class="nav-item">
+			<a class="nav-link" href="/inserimentoStruttura" method="GET">
+			  <i class="fas fa-home"></i>
+			  <span>Inserimento Struttura</span>
+			</a>
+		  </li>
+		  <li class="nav-item active">
+			<a class="nav-link" href="/selezioneModificaStruttura" method="GET">
+			  <i class="fas fa-angle-right"></i>
+			  <span>Modifica Struttura</span>
+			</a>
+		  </li>
+		  <li class="nav-item">
+			<a class="nav-link" href="/gestioneRichieste" method="GET">
+			  <i class="far fa-comments"></i>
+			  <span>Gestione Richieste</span>
+			</a>
+		  </li>
+		  <!-- Divider -->
+		  <hr class="sidebar-divider">
+
+		  <!-- Heading -->
+		  <div class="sidebar-heading">
+			Servizi Esterni
+		  </div>
+		  <!-- Nav Item - Charts -->
+		  <li class="nav-item">
+			<a class="nav-link" href="/datiOspite" method="GET">
+			  <i class="far fa-address-card"></i>
+			  <span>Comunicazione Ospiti</span></a>
+		  </li>
+		  <li class="nav-item">
+			<a class="nav-link" href="/rendicontoTrimestrale" method="GET">
+			  <i class="fas fa-fw fa-table"></i>
+			  <span>Rendiconto Trimestrale</span></a>
+		  </li>
+      <hr class="sidebar-divider d-none d-md-block">
+      <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+      </div>
+    </ul>
+
+    <div id="content-wrapper" class="d-flex flex-column">
+        <%- include('../../script/NavbarProp.ejs') %>
+
+				<form class="f-ins" action='/invioModifica' method='POST'>
+					<div>
+						<div>
+							<div class="section over-hide z-bigger">
+								<label class="for-checkbox" for="general"></label>
+								<div class="section over-hide z-bigger">
+									<div class="container pb-5">
+										<div class="row justify-content-center pb-5">
+											<div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate="Il nome della struttura è richiesto e non può superare i 20 caratteri">
+												<span class="label-input100">Nome Struttura</span>
+												<input class="input100" type="text" name="nome_str_nuova" maxlength="20" placeholder="Inserisci il nome della tua struttura" value="<%=struttura.nome_str%>" required>
+												<span class="focus-input100"></span>
+											</div>
+											<div class="wrap-input100 rs1-wrap-input100 " >
+												<table class="camere-ins">
+													<tr>
+														<th class="th"> Indirizzo </th>
+														<th class="th"> civico </th>
+														<th class="th"> comune </th>
+														<th class="th"> cap </th>
+													</tr>
+													<tr>
+														<td>  <input class="input100" type="text" name="indirizzo" placeholder="via..." value="<%=struttura.indirizzo%>" required>
+															<span class="focus-input100"></span>
+														</td>
+														<td>  <input class="input100" type="number" name="civico"  placeholder="" value="<%=struttura.civico%>" required>
+															<span class="focus-input100"></span> </td>
+														<td>  <input class="input100" type="text" name="comune"  placeholder="" value="<%=struttura.comune%>" required>
+															<span class="focus-input100"></span> </td>
+															<td>  <input class="input100" type="number" name="cap"  placeholder="" value="<%=struttura.cap%>" required>
+																<span class="focus-input100"></span> </td>
+													</tr>
+												</table>
+											</div>
+
+
+
+											<div class="wrap-input100 rs1-wrap-input100 " >
+												<table class="camere-ins">
+													<tr>
+                              <% if (struttura.tipologia == "Casa Vacanza") { %>
+  														  <th class="th"> Prezzo a notte</th>
+  														<% }
+  														else { %>
+  															<th class="th"> Prezzo a persona</th>
+  														<% } %>
+														<th class="th"> Distanza dal centro</th>
+														<th class="th"> Tassa di Soggiorno</th>
+														<th class="th"> Telefono</th>
+													</tr>
+													<tr>
+														<td><input class="input100" type="int" name="prezzo" min='1' placeholder="€ 0" value="<%=struttura.prezzo%>" required>
+															<span class="focus-input100"></span>  </td>
+														<td> <input class="input100" type="int" name="distanza" min='1' placeholder="Km 0" value="<%=struttura.distanza_km_centro%>" required>
+															<span class="focus-input100"></span>  </td>
+														<td> <% if (struttura.tipologia == "Casa Vacanza") { %>
+															<input class="input100" type="int" name="tassa" min='0' placeholder="€ 0" value="0" disabled>
+														<% }
+														else { %>
+															<input class="input100" type="int" name="tassa" min='0' placeholder="€ 0" value="<%=struttura.tassa_di_soggiorno%>" required>
+														<% } %>
+															<span class="focus-input100"></span>  </td>
+														<td> <input class="input100" type="number" name="telefono" min='1' placeholder="" value="<%=struttura.telefono%>" required>
+															<span class="focus-input100"></span>  </td>
+													</tr>
+													<tr>
+														<td> <i class="fas fa-coins"></i> </td>
+														<td> <i class="fas fa-car"></i></td>
+														<td><i class="fas fa-hotel"></i></td>
+														<td><i class="fas fa-phone"></i></td>
+													</tr>
+												</table>
+											</div>
+											<div class="wrap-input100 validate-input" data-validate = "La descrizione della struttura è richiesta">
+												<span class="label-input100">Descrizione Struttura</span>
+												<textarea class="input100" name="descrizione" placeholder="Scrivi una breve descrizione della tua struttura" required><%=struttura.descrizione_struttura%></textarea>
+												<span class="focus-input100"></span>
+											</div>
+
+
+											<div class="wrap-input100 " >
+												<table class="camere-ins">
+													<tr>
+														<th class="th">Camera singola </th>
+														<th class="th">Camera doppia </th>
+														<th class="th">Camera tripla </th>
+														<th class="th">Camera quadrupla </th>
+													</tr>
+													<tr>
+														<td>
+															<input class="input100" type="number" name="singola" min='0' value="<%=struttura.camera_singola%>" placeholder="0" required>
+															<span class="focus-input100"></span>
+														</td>
+														<td>
+															<input class="input100" type="number" name="doppia" min='0' placeholder="0" value="<%=struttura.camera_doppia%>" required>
+															<span class="focus-input100"></span>
+														</td>
+														<td>
+															<input class="input100" type="number" name="tripla" min='0' placeholder="0" value="<%=struttura.camera_tripla%>" required>
+															<span class="focus-input100"></span>
+														</td>
+														<td>
+															<input class="input100" type="number" name="quadrupla" min='0' placeholder="0" value="<%=struttura.camera_quadrupla%>" required>
+															<span class="focus-input100"></span>
+														</td>
+													</tr>
+													<tr>
+														<td>
+															<i class="fas fa-bed"></i>
+														</td>
+														<td>
+															<i class="fas fa-bed"></i>
+															<i class="fas fa-bed"></i>
+														</td>
+														<td>
+															<i class="fas fa-bed"></i>
+															<i class="fas fa-bed"></i>
+															<i class="fas fa-bed"></i>
+														</td>
+														<td>
+															<i class="fas fa-bed"></i>
+															<i class="fas fa-bed"></i>
+															<i class="fas fa-bed"></i>
+															<i class="fas fa-bed"></i>
+														</td>
+													</tr>
+												</table>
+											</div>
+
+											<div class="wrap-input100 " >
+												<div class="col-12 pb-5">
+													<%- include('../../script/Servizi.ejs') %>
+												</div>
+											</div>
+											<input type="hidden" name="nome_str_vecchia" value="<%=struttura.nome_str%>"/>
+											<div class="container-contact100-form-btn">
+												<button class="contact100-form-btn">
+													<span>
+														Conferma <i class='fas fa-caret-right'></i>
+													</span>
+												</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</form>
+            	</div>
+
+    <footer class="sticky-footer bg-white">
+        <div class="container my-auto">
+          <div class="copyright text-center my-auto">
+            <span>Copyright &copy; Team Maag 2020</span>
+          </div>
+        </div>
+    </footer>
+</div>
+
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
+
+
+  <%- include('../../script/LogoutProp.ejs') %>
+  <%- include('../../script/Alert.ejs') %>
+  <%- include('../../script/ProprietarioJS.ejs') %>
+  <script src="../../public/js/index/jquery/jquery-3.2.1.min.js"></script>
+  <script src="../../public/js/index/bootstrap.min.js"></script>
+  <script src="../../public/js/index/js/index/main.js"></script>
+  <script defer src="../../js/icon/all.js"></script>
+
+</body>
+</html>

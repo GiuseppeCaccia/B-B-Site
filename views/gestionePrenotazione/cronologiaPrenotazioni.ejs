@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Hiroto Template">
+    <meta name="keywords" content="Hiroto, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Cronologia Prenotazioni</title>
+
+    <link rel="stylesheet" href="../../public/stylesheets/css/cronologia/style.css" type="text/css">
+    <link rel="stylesheet" href="../../public/stylesheets/css/admin/sb-admin-2.css">
+    <link rel="stylesheet" href="../../public/stylesheets/css/admin/gestioneRichieste/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="../../public/stylesheets/css/admin/gestioneRichieste/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="../../public/stylesheets/css/admin/gestioneRichieste/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="../../public/stylesheets/css/admin/gestioneRichieste/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="../../public/stylesheets/css/admin/gestioneRichieste/jquery-ui.min.css" type="text/css">
+    <link rel="stylesheet" href="../../public/stylesheets/css/admin/gestioneRichieste/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="../../public/stylesheets/css/admin/gestioneRichieste/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="../../public/stylesheets/css/admin/gestioneRichieste/style.css" type="text/css">
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    <link rel="stylesheet" href="../../public/stylesheets/css/index/css/animate.css">
+    <link rel="stylesheet" href="../../public/stylesheets/css/index/css/icomoon.css">
+
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark " id="ftco-navbar"  style="box-shadow: 2px 2px 2px 2px lightgray; font-family:'Poppins', Arial, sans-serif;">
+    <div class="container">
+      <a class="navbar-brand" href="/">Maag</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="oi oi-menu"></span> Menu
+      </button>
+      <div class="collapse navbar-collapse" id="ftco-nav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a href="../cronologiaPrenotazioni"  style="font-family:'Poppins', Arial, sans-serif;" onmouseover="this.style.textDecoration='underline';"  onmouseout="this.style.textDecoration='none'" method = "GET" class="nav-link" >Cronologia Prenotazioni  </a>
+          </li>
+        <li class="nav-item active">
+          <a href="#" data-toggle="modal"  style=" font-family:'Poppins', Arial, sans-serif;" onmouseover="this.style.textDecoration='underline';"  onmouseout="this.style.textDecoration='none';" data-target="#logoutModal" class="nav-link">Logout</a>
+        </li>
+    </ul>
+      </div>
+    </div>
+  </nav>
+
+  <%prenotazione.forEach(function(prenotazione){%>
+        <section class="rooms spad">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-6 p-0 order-lg-3 order-md-3 col-md-6">
+                            <div class="room__pic__slider owl-carousel">
+                                <div class="room__pic__item set-bg" data-setbg="../../public/images/filesystem/<%=prenotazione.nome_imm1%>"></div>
+                                <div class="room__pic__item set-bg" data-setbg="../../public/images/filesystem/<%=prenotazione.nome_imm2%>"></div>
+                                <div class="room__pic__item set-bg" data-setbg="../../public/images/filesystem/<%=prenotazione.nome_imm3%>"></div>
+                                <div class="room__pic__item set-bg" data-setbg="../../public/images/filesystem/<%=prenotazione.nome_imm4%>"></div>
+                                <div class="room__pic__item set-bg" data-setbg="../../public/images/filesystem/<%=prenotazione.nome_imm5%>"></div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 p-0 order-lg-4 order-md-4 col-md-6">
+                            <div class="room__text right__text">
+                                <h3><%=prenotazione.nome_str%></h3>
+                                <h2><sup>€</sup><%=prenotazione.prezzo%><span>/giorno</span></h2>
+                                <ul>
+                                    <li><span>Totale pagato:</span><%=prenotazione.importo%>€</li>
+                                    <li><span>Data soggiorno:</span><%=prenotazione.data_arr%> - <%=prenotazione.data_rit%></li>
+                                </ul>
+                                <div style="display: flex; justify-content: initial;">
+                                <form action="/valutaStruttura" method="GET">
+                                  <% if (data < prenotazione.data_ritorno || prenotazione.pagato == 0) { %>
+                                    <button style="float:left" class="btn-pagato" type="submit" name="conferma" id="valuta" disabled>Valuta</button>
+                                  <% }
+                                  else if(data >= prenotazione.data_ritorno && prenotazione.pagato == 1) { %>
+                                   <button style="float:left" class="btn-valuta" type="submit" name="conferma" id="valuta">Valuta</button>
+                                  <% } %>
+                                <input type="hidden" name ="nome_str" value='<%=prenotazione.nome_str%>'></input>
+                                <input type="hidden" name ="nome_prop" value='<%=prenotazione.str_prop1%>'></input>
+                              </form>
+                              <form  action="/FormPagamento" method="GET">
+                                <% if (prenotazione.pagato == 0) { %>
+                                  <button  class="btn-paga-adesso" type="submit" name="pagamento">Paga Adesso</button>
+                                <% }
+                                else { %>
+                                  <button class="btn-pagato" type="submit" name="pagamento" disabled>Pagato</button>
+                                <% } %>
+                              <input type="hidden" name ="nome_str" value='<%=prenotazione.nome_str%>'></input>
+                              <input type="hidden" name ="prezzo" value='<%=prenotazione.prezzo%>'></input>
+                              <input type="hidden" name ="tassa" value='<%=prenotazione.tassa_di_soggiorno%>'></input>
+                              <input type="hidden" name ="importo" value='<%=prenotazione.importo%>'></input>
+                              <input type="hidden" name ="nome_imm1" value='<%=prenotazione.nome_imm1%>'></input>
+                              <input type="hidden" name ="num_ospiti" value='<%=prenotazione.ospitiPrenotati%>'></input>
+                              <input type="hidden" name ="data_arr"  value='<%=prenotazione.data_arr%>'></input>
+                              <input type="hidden" name ="data_rit" id='ritorno' value='<%=prenotazione.data_rit%>'></input>
+                              <input type="hidden" name ="nome_prop" value='<%=prenotazione.str_prop1%>'></input>
+                              <input type="hidden" name ="emailCl" value='<%=prenotazione.ref1_client%>'></input>
+                              </form>
+                              </div>
+                            </div>
+                            </div>
+            </section>
+          <%}); %>
+
+          <footer class="ftco-footer ftco-bg-dark ftco-section" style="margin-top: 15vw;">
+            <div class="container">
+              <div class="row mb-5">
+              <div class="col-md">
+                <div class="ftco-footer-widget mb-4">
+                <h2 class="ftco-heading-2">Maag</h2>
+                <p>Maag è un'agenzia di viaggi online per le prenotazioni di alloggi.
+                   Il sito offre una scelta ampissima, con oltre 100.000 alloggi in tutta Italia.
+                   Trovare un'offerta vantaggiosa con Maag è davvero semplice: basta un click per prenotare la tua vacanza personalizzata.
+                   È di proprietà ed è gestito dal Team Maag con sede a Palermo</p>
+                   <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
+                     <li class="ftco-animate"><a href="https://twitter.com/Maag06755356" target="_blank"><span class="icon-twitter"></span></a></li>
+                     <li class="ftco-animate"><a href="https://www.facebook.com/Maag-108011384314882/?ref=page_internal" target="_blank"><span class="icon-facebook"></span></a></li>
+                     <li class="ftco-animate"><a href="https://www.instagram.com/maag1920/" target="_blank"><span class="icon-instagram"></span></a></li>
+                </ul>
+                </div>
+              </div>
+              <div class="col-md">
+                <div class="ftco-footer-widget mb-4 ml-md-5">
+                <h2 class="ftco-heading-2">Info utili</h2>
+                <p>Clicca sul pulsante registrati che trovi in alto nella pagina, compila il form, e sei subito dei nostri</p>
+                <p>Sei nel posto giusto, inserire la propria struttura è del tutto gratuito, comincia subito a fare affari con un semplice click.</p>
+                <p>Quando sei indeciso sulla prenotazione di una struttura, dai sempre un'occhiata alle recensioni, potrebbero aiutarti nella tua scelta </p>
+                </div>
+              </div>
+              <div class="col-md">
+                 <div class="ftco-footer-widget mb-4">
+                <h2 class="ftco-heading-2">Privacy</h2>
+                <p>I tuoi dati sono al sicuro, protetti con la tecnologia HTTPS che garantisce una completa cifratura dei tuoi dati sensibili </p>
+                </div>
+              </div>
+              <div class="col-md">
+                <div class="ftco-footer-widget mb-4">
+                  <h2 class="ftco-heading-2">Hai domande? Contattaci</h2>
+                  <div class="block-23 mb-3">
+                  <ul>
+                    <li><p><span class="icon icon-envelope"></span><a class="text" href="mailto:martinamilazzo@gmail.com">Martina Milazzo</a></p></li>
+                    <li><p><span class="icon icon-envelope"></span><a class="text" href="mailto:alextorre95@gmail.com">Alessandro Torregrossa</a></p></li>
+                    <li><p><span class="icon icon-envelope"></span><a class="text" href="mailto:fixdo97@libero.it">Andrea Costa</a></p></li>
+                    <li><p><span class="icon icon-envelope"></span><a class="text" href="mailto:giuseppecacciafeda98@libero.it">Giuseppe Cacciafeda</a></p></li>
+                  </ul>
+                  </div>
+                </div>
+              </div>
+              </div>
+              <div class="row">
+              <div class="col-md-12 text-center">
+                <p>Copyright &copy;<script>document.write(new Date().getFullYear());</script> Tutti i diritti riservati dal Team Maag</p>
+                <p>Corso di laurea : Ingegneria Informatica, Università degli studi di Palermo, Sicilia </p>
+              </div>
+              </div>
+            </div>
+            </footer>
+
+    <%- include('../../script/Alert.ejs') %>
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Pronto ad andartene?</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                </div>
+                <div class="modal-body">Seleziona "Logout" per terminare la sessione corrente.</div>
+                <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                <a class="btn btn-primary" href="/LogoutCliente">Logout</a>
+                </div>
+            </div>
+        </div>
+
+
+    <script src="../../public/js/admin/gestioneRichieste/jquery-3.3.1.min.js"></script>
+    <script src="../../public/js/admin/gestioneRichieste/bootstrap.min.js"></script>
+    <script src="../../public/js/admin/gestioneRichieste/jquery.nice-select.min.js"></script>
+    <script src="../../public/js/admin/gestioneRichieste/jquery-ui.min.js"></script>
+    <script src="../../public/js/admin/gestioneRichieste/jquery.slicknav.js"></script>
+    <script src="../../public/js/admin/gestioneRichieste/owl.carousel.min.js"></script>
+    <script src="../../public/js/admin/gestioneRichieste/main.js"></script>
+	  <script src="../../public/js/index/jquery.waypoints.min.js"></script>
+	  <script src="../../public/js/index/jquery.stellar.min.js"></script>
+	  <script src="../../public/js/index/aos.js"></script>
+	  <script src="../../public/js/index/scrollax.min.js"></script>
+
+</body>
+</html>

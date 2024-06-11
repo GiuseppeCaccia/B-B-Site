@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+	<title>Registrati</title>
+
+	<!-- For-Mobile-Apps -->
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="keywords" content="Classy Forms Widget Responsive, Login Form Web Template, Flat Pricing Tables, Flat Drop-Downs, Sign-Up Web Templates, Flat Web Templates, Login Sign-up Responsive Web Template, Smartphone Compatible Web Template, Free Web Designs for Nokia, Samsung, LG, Sony Ericsson, Motorola Web Design" />
+		<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+	<!-- //For-Mobile-Apps -->
+
+    <!-- Style --> <link rel="stylesheet" href="../../public/stylesheets/css/login/styleAutenticazione.css" type="text/css" media="all" />
+	<link rel="stylesheet" type="text/css" href="../../public/stylesheets/css/login/main.css">
+	<!-- Default-JavaScript-File --> <script type="text/javascript" src="../../public/js/login/jquery.min.js"></script>
+
+	<!-- Web-Fonts -->
+	<link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i" rel="stylesheet">
+	<!-- //Web-Fonts -->
+	<link rel="stylesheet" href="../../public/stylesheets/css/dettaglio/star.css" type = "text/css"/>
+	<link rel="stylesheet" type="text/css" href="../../public/stylesheets/css/login/style.css">
+	<link rel="stylesheet" href="../../public/stylesheets/css/index/css/animate.css">
+	<link rel="stylesheet" href="../../public/stylesheets/css/index/css/icomoon.css">
+	<link rel="stylesheet" type="text/css" href="../../public/stylesheets/css/index/alert.css">
+
+
+
+
+</head>
+<body>
+
+	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark " id="ftco-navbar">
+	    <div class="container">
+			<a style="font-family:'Poppins', Arial, sans-serif;" class="navbar-brand" href="/">Maag</a>
+	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+	        <span class="oi oi-menu"></span> Menu
+	      </button>
+	      <div class="collapse navbar-collapse" id="ftco-nav">
+	        <ul class="navbar-nav ml-auto">
+
+					<li class="nav-item active">
+						<a href="/accesso" style=" font-family:'Poppins', Arial, sans-serif;" class="nav-link">Accedi</a>
+					</li>
+					<li class="nav-item active">
+						<a href="/registrazione"  style=" font-family:'Poppins', Arial, sans-serif;" class="nav-link">Registrati</a>
+					</li>
+			</ul>
+	      </div>
+	    </div>
+    </nav>
+
+	<div class="containerAccesso">
+		<div class="tab">
+			<div id="horizontalTab" style="display: block; width: 100%; margin: 0px;">
+				<script src="../../public/js/login/easyResponsiveTabs.js" type="text/javascript"></script>
+				<script type="text/javascript">
+					$(document).ready(function () {
+						$('#horizontalTab').easyResponsiveTabs({
+							type: 'default', //Types: default, vertical, accordion
+							width: 'auto', //auto or any width like 600px
+							fit: true,   // 100% fit in a container
+							closed: 'accordion', // Start closed if in accordion view
+							activate: function(event) { // Callback function if tab is switched
+								var $tab = $(this);
+								var $info = $('#tabInfo');
+								var $name = $('span', $info);
+								$name.text($tab.text());
+								$info.show();
+							}
+						});
+
+						$('#verticalTab').easyResponsiveTabs({
+							type: 'vertical',
+							width: 'auto',
+							fit: true
+						});
+					});
+				</script>
+
+				<div class="tabs">
+					<div class="tab-left">
+						<ul class="resp-tabs-list">
+							<li class="resp-tab-item">Registrati come Cliente</li>
+							<li class="resp-tab-item">Registrati come Proprietario</li>
+						</ul>
+					</div>
+
+					<div class="tab-right">
+						<div class="resp-tabs-container">
+							<div class="tab-1 resp-tab-content">
+								<div class="agileinfo-recover">
+								<h3>Registrati come Cliente</h3>
+									<form action="/RegistrazioneCliente" method="POST">
+										<div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate="Compilare il campo">
+											<label class="label-input100"> Nome</label>
+											 <input class="input100" type="text" name="nome_cliente" pattern="[A-Z,a-z]{3,}" required>
+											 <span class="focus-input100"></span>
+										 </div>
+										 <div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate="Compilare il campo">
+											 <label class="label-input100"> Cognome</label>
+											  <input class="input100" type="text" name="cognome_cliente" pattern="[A-Z,a-z]{3,}" required>
+											  <span class="focus-input100"></span>
+										  </div>
+										  <div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate="Compilare il campo">
+											<label class="label-input100"> Data di nascita</label>
+											 <input class="input100" type="date" name="data_di_nascita" id="data_di_nascita_c" placeholder="Inserire data di nascita" onblur="dobValidate_c(this.value)" required>
+											 <span class="focus-input100"></span>
+											 <span id="message_data_c"></span>
+										 </div>
+										 <div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate="Compilare il campo">
+											<label class="label-input100"> Telefono</label>
+											 <input class="input100" type="tel" name="telefono" pattern="[0-9]{10,}" required>
+											 <span class="focus-input100"></span>
+										 </div>
+										 <div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate="Compilare il campo">
+											<label class="label-input100"> Email</label>
+											 <input class="input100" type="email" name="email_cliente" placeholder="example@gmail.com" pattern="[a-z0-9._%+-]+@[a-z]{4,9}+.[a-z]{2,3}" title = "Utilizza un email valida" required>
+											 <span class="focus-input100"></span>
+										 </div>
+										 <div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate="Compilare il campo">
+                                            <label class="label-input100"> Password</label>
+                                             <input class="input100" type="password" id="password_c" name="password_cliente" placeholder="******" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="La password deve essere composta da almeno 8 caratteri, deve contenere almeno un carattere maiuscolo, uno minuscolo, un numero e un carattere appartenente ai caratteri non alfabetici" required>
+                                             <span class="focus-input100"></span>
+                                         </div>
+										 <div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate="Compilare il campo">
+                                            <label class="label-input100"> Conferma Password</label>
+                                             <input class="input100" type="password" id="confirm_password_c" name="repassword_cliente" placeholder="******" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title = "La password deve essere composta da almeno 8 caratteri, deve contenere almeno un carattere maiuscolo, uno minuscolo, un numero e un carattere appartenente ai caratteri non alfabetici" required>
+											 <span class="focus-input100"></span>
+											 <span id="message_c"></span>
+										 </div>
+										 <input type="submit" id="invio_c" value="Registrati">
+									</form>
+								</div>
+							</div>
+							<div class="tab-1 resp-tab-content">
+								<div class="agileinfo-recover">
+								<h3>Registrati come Proprietario</h3>
+									<form action="/RegistrazioneProprietario" method="POST">
+										<div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate="Compilare il campo">
+											<label class="label-input100"> Nome</label>
+											 <input class="input100" type="text" name="nome_prop" pattern="[A-Z,a-z]{3,}" required>
+											 <span class="focus-input100"></span>
+										 </div>
+										 <div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate="Compilare il campo">
+											 <label class="label-input100"> Cognome</label>
+											  <input class="input100" type="text" name="cognome_prop" pattern="[A-Z,a-z]{3,}" required>
+											  <span class="focus-input100"></span>
+										  </div>
+										  <div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate="Compilare il campo">
+											<label class="label-input100"> Data di nascita</label>
+											 <input class="input100" type="date" name="data_di_nascita" id="data_di_nascita_p" placeholder="Inserire data di nascita" onblur="dobValidate_p(this.value)" required>
+											 <span class="focus-input100"></span>
+											 <span id="message_data_p"></span>
+										 </div>
+										<div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate="Compilare il campo">
+											<label class="label-input100">Partita Iva</label>
+											 <input class="input100" type="text" name="piva" pattern="[0-9]{11}" required>
+											 <span class="focus-input100"></span>
+										 </div>
+										<div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate="Compilare il campo">
+											<label class="label-input100"> Email</label>
+											 <input class="input100" type="email" name="email_prop" placeholder="example@gmail.com" pattern="[a-z0-9._%+-]+@[a-z]{4,9}+.[a-z]{2,3}" title = "Utilizza un email valida" required>
+											 <span class="focus-input100"></span>
+										 </div>
+										 <div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate="Compilare il campo">
+                                            <label class="label-input100"> Password</label>
+                                             <input class="input100" type="password" id="password_p" name="password_prop" placeholder="******"pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title = "La password deve essere composta da almeno 8 caratteri, deve contenere almeno un carattere maiuscolo, uno minuscolo, un numero e un carattere appartenente ai caratteri non alfabetici" required>
+                                             <span class="focus-input100"></span>
+                                         </div>
+										 <div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate="Compilare il campo">
+                                            <label class="label-input100"> Conferma Password</label>
+                                             <input class="input100" type="password" id="confirm_password_p" name="repassword_prop" placeholder="******" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title = "La password deve essere composta da almeno 8 caratteri, deve contenere almeno un carattere maiuscolo, uno minuscolo, un numero e un carattere appartenente ai caratteri non alfabetici" required>
+											 <span class="focus-input100"></span>
+											 <span id="message_p"></span>
+										 </div>
+										 <input type="submit" id="invio_p" value="Registrati">
+									</form>
+								</div>
+							</div>
+							<div class="tab-1 resp-tab-content">
+								<div class="agile-send-mail">
+							</div>
+							</div>
+						</div>
+					</div>
+					<div class="clear"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+    <footer class="ftco-footer ftco-bg-dark ftco-section">
+		<div class="container">
+		  <div class="row mb-5">
+			<div class="col-md">
+			  <div class="ftco-footer-widget mb-4">
+				<h2 class="ftco-heading-2">Maag</h2>
+				<p>Maag è un'agenzia di viaggi online per le prenotazioni di alloggi.
+				   Il sito offre una scelta ampissima, con oltre 100.000 alloggi in tutta Italia.
+				   Trovare un'offerta vantaggiosa con Maag è davvero semplice: basta un click per prenotare la tua vacanza personalizzata.
+				   È di proprietà ed è gestito dal Team Maag con sede a Palermo</p>
+				   <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
+						<li class="ftco-animate"><a href="https://twitter.com/Maag06755356" target="_blank"><span class="icon-twitter"></span></a></li>
+	 					<li class="ftco-animate"><a href="https://www.facebook.com/Maag-108011384314882/?ref=page_internal" target="_blank"><span class="icon-facebook"></span></a></li>
+	 					<li class="ftco-animate"><a href="https://www.instagram.com/maag1920/" target="_blank"><span class="icon-instagram"></span></a></li>
+				   </ul>
+			  </div>
+			</div>
+			<div class="col-md">
+			  <div class="ftco-footer-widget mb-4 ml-md-5">
+				<h2 class="ftco-heading-2">Info utili</h2>
+				<p>Clicca sul pulsante registrati che trovi in alto nella pagina, compila il form, e sei subito dei nostri</p>
+				<p>Sei nel posto giusto, inserire la propria struttura è del tutto gratuito, comincia subito a fare affari con un semplice click.</p>
+				<p>Quando sei indeciso sulla prenotazione di una struttura, dai sempre un'occhiata alle recensioni, potrebbero aiutarti nella tua scelta </p>
+			  </div>
+			</div>
+			<div class="col-md">
+			   <div class="ftco-footer-widget mb-4">
+				<h2 class="ftco-heading-2">Privacy</h2>
+				<p>I tuoi dati sono al sicuro, protetti con la tecnologia HTTPS che garantisce una completa cifratura dei tuoi dati sensibili </p>
+			  </div>
+			</div>
+			<div class="col-md">
+			  <div class="ftco-footer-widget mb-4">
+				  <h2 class="ftco-heading-2">Hai domande? Contattaci</h2>
+				  <div class="block-23 mb-3">
+					<ul>
+					  <li><p><span class="icon icon-envelope"></span><a class="text" href="mailto:martinamilazzo@gmail.com">Martina Milazzo</a></p></li>
+						<li><p><span class="icon icon-envelope"></span><a class="text" href="mailto:alextorre95@gmail.com">Alessandro Torregrossa</a></p></li>
+						<li><p><span class="icon icon-envelope"></span><a class="text" href="mailto:fixdo97@libero.it">Andrea Costa</a></p></li>
+						<li><p><span class="icon icon-envelope"></span><a class="text" href="mailto:giuseppecacciafeda98@libero.it">Giuseppe Cacciafeda</a></p></li>
+					</ul>
+				  </div>
+			  </div>
+			</div>
+		  </div>
+		  <div class="row">
+			<div class="col-md-12 text-center">
+			  <p>Copyright &copy;<script>document.write(new Date().getFullYear());</script> Tutti i diritti riservati dal Team Maag</p>
+			  <p>Corso di laurea : Ingegneria Informatica, Università degli studi di Palermo, Sicilia </p>
+			</div>
+		  </div>
+		</div>
+	  </footer>
+
+	<script src="../../public/js/index/bootstrap.min.js"></script>
+	<script src="../../public/js/index/jquery.waypoints.min.js"></script>
+	<script src="../../public/js/index/jquery.stellar.min.js"></script>
+	<script src="../../public/js/index/owl.carousel.min.js"></script>
+	<script src="../../public/js/index/aos.js"></script>
+	<script src="../../public/js/index/scrollax.min.js"></script>
+	<script src="../../public/js/index/main.js"></script>
+	<%- include('../../script/Alert.ejs') %>
+	<%- include('../../script/CheckData.ejs') %>
+	<%- include('../../script/CheckPassword.ejs') %>
+	<%- include('../../script/Alert.ejs') %>
+</body>
+</html>

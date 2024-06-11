@@ -1,0 +1,26 @@
+<script>
+    function CaricaRecensione(){
+      <% recensione.forEach(function(recensione){%>
+      if ('<%=recensione.ref_client%>' == '<%=emailCliente%>'){
+        document.getElementById("descrizione").innerHTML = '<%=recensione.commento%>';
+        document.getElementById("conferma").value = '2';
+        console.log('<%=recensione.punteggio%>');
+        if('<%=recensione.punteggio%>' == 1){
+          $("#star1").prop('checked', true);
+        }
+        else if('<%=recensione.punteggio%>' == 2){
+          $("#star2").prop('checked', true);
+        }
+        else if('<%=recensione.punteggio%>' == 3){
+          $("#star3").prop('checked', true);
+        }
+        else if('<%=recensione.punteggio%>' == 4){
+          $("#star4").prop('checked', true);
+        }
+        else if('<%=recensione.punteggio%>' == 5){
+          $("#star5").prop('checked', true);
+        }
+      }
+      <%}); %>
+    }
+</script>

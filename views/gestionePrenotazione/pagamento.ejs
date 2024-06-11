@@ -1,0 +1,126 @@
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE html>
+<html>
+<head>
+<title>Pagina Pagamento</title>
+<!-- for-mobile-apps -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="Hotel Checkout Form Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+		function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!-- //for-mobile-apps -->
+<link href="../../public/stylesheets/css/pagamento/css/style.css" rel="stylesheet" type="text/css" media="all" />
+<script src="../../public/stylesheets/css/pagamento/js/jquery.min.js"></script>
+<link href='//fonts.googleapis.com/css?family=Droid+Serif:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
+<link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
+<!-- script for close -->
+<script>
+$(document).ready(function(c) {
+	$('.alert-close').on('click', function(c){
+		$('.vlcone').fadeOut('slow', function(c){
+			$('.vlcone').remove();
+		});
+	});
+});
+</script>
+<!-- //script for close -->
+</head>
+<body >
+<div class="main">
+	<h1>Form Pagamento</h1>
+
+	<div class="hotel-right  vlcone">
+		<div class="alert-close"> </div>
+		<div class="hotel-form">
+			<h3>Riepilogo Pagamento</h3>
+			<ul class="list_ins1">
+						<li>Ospiti</li>
+						<li>Prezzo</li>
+						<li>Tassa di Soggiorno</li>
+						<li>Totale</li>
+			</ul>
+			<ul class="list_ins2">
+						<li>: <%=info.ospiti%></li>
+						<li>: €<%=info.prezzo%></li>
+						<li>: €<%=info.tassa%></li>
+						<li>: €<%=info.totale%></li>
+			</ul>
+			<div class="clear"></div>
+		</div>
+		<div class="pay-form">
+			<form action="/pagamento" method="POST">
+				<h3>Informazioni di pagamento</h3>
+				<h5>Nome intestatario</h5>
+				<input type="text" required="">
+
+				<h5>Numero Carta di Credito</h5>
+				<input class="card_logo" type="text"  required="" pattern="[0-9]{16}">
+
+				<h5>Data di scadenza</h5>
+				<select id="mese" class="frm-field required">
+					<option value="AX">Gennaio</option>
+					<option value="AX">Febbraio</option>
+					<option value="AX">Marzo</option>
+					<option value="AX">Aprile</option>
+					<option value="AX">Maggio</option>
+					<option value="AX">Giugno</option>
+					<option value="AX">Luglio</option>
+					<option value="AX">Agosto</option>
+					<option value="AX">Settembre</option>
+					<option value="AX">Ottobre</option>
+					<option value="AX">Novembre</option>
+					<option value="AX">Dicembre</option>
+				</select>
+				<ul>
+					<li>
+						<select id="anno" class="frm-field required">
+							<option value="AX">2020</option>
+							<option value="AX">2021</option>
+							<option value="AX">2022</option>
+							<option value="AX">2023</option>
+							<option value="AX">2024</option>
+							<option value="AX">2025</option>
+							<option value="AX">2026</option>
+							<option value="AX">2027</option>
+							<option value="AX">2028</option>
+							<option value="AX">2029</option>
+							<option value="AX">2030</option>
+							<option value="AX">2031</option>
+						</select>
+					</li>
+				</ul>
+				<div class="clear"></div>
+				<h5>CVC</h5>
+                <input type="text" name="cvc" required=""  pattern="[0-9]{3}">
+
+                <input type="hidden" name ="emailProp" value='<%=info.emailProp%>'></input>
+                <input type="hidden" name ="nome_str" value='<%=info.nome%>'></input>
+                <input type="hidden" name ="emailCliente" value='<%=info.emailCliente%>'></input>
+                <input type="hidden" name ="arrivo" value='<%=info.arrivo%>'></input>
+				<input type="hidden" name ="ritorno" value='<%=info.ritorno%>'></input>
+				<input type="hidden" name="totale" value='<%=info.totale%>'></input>
+				<input type="submit" value="Paga con sicurezza">
+			</form>
+			<p><span></span>Le informazioni della tua carta di credito sono cryptate.</p>
+		</div>
+	</div>
+	<div class="hotel-left" >
+		<div class="hotel-text">
+			<h2><%=info.nome%></h2>
+			<h3> <%=info.prezzo%>€/ <span>a persona</span></h3>
+			<p>Stanza per <%=info.ospiti%> ospiti.</p>
+			<p> Da <%=info.arrivo%> A  <%=info.ritorno%></p>
+		</div>
+	</div>
+	<div class="clear"></div>
+	<p class="footer">Copyright &copy;<script>document.write(new Date().getFullYear());</script> Tutti i diritti riservati dal Team Maag</p>
+</div>
+</body>
+</html>

@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="it">
+  <head>
+    <title>MAAG</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i" rel="stylesheet">
+    <link rel="stylesheet" href="../../public/stylesheets/css/index/css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="../../public/stylesheets/css/index/css/animate.css">
+    <link rel="stylesheet" href="../../public/stylesheets/css/index/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="../../public/stylesheets/css/index/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="../../public/stylesheets/css/index/css/magnific-popup.css">
+    <link rel="stylesheet" href="../../public/stylesheets/css/index/css/aos.css">
+    <link rel="stylesheet" href="../../public/stylesheets/css/index/css/ionicons.min.css">
+    <link rel="stylesheet" href="../../public/stylesheets/css/index/css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="../../public/stylesheets/css/index/css/flaticon.css">
+    <link rel="stylesheet" href="../../public/stylesheets/css/index/css/icomoon.css">
+    <link rel="stylesheet" href="../../public/stylesheets/css/index/css/style.css">
+    <link rel="stylesheet" href="../../public/stylesheets/css/dettaglio/button.css">
+    <link rel="stylesheet" type="text/css" href="../../public/stylesheets/css/admin/inserimentoStruttura/button.css">
+    <link rel="stylesheet" type="text/css" href="../../public/stylesheets/css/dettaglio/style.css">
+    <link rel="stylesheet" type="text/css" href="../../public/stylesheets/css/dettaglio/custom.css">
+    <%- include('../../script/Stelle.ejs') %>
+
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+	    <div class="container">
+	      <a class="navbar-brand" href="/">Maag</a>
+	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+	        <span class="oi oi-menu"></span> Menu
+	      </button>
+	      <div class="collapse navbar-collapse" id="ftco-nav">
+	        <ul class="navbar-nav ml-auto">
+				<% if (sessione == undefined) { %>
+					<li class="nav-item active">
+						<a href="/accesso" method = "GET" class="nav-link">Accedi</a>
+					</li>
+					<li class="nav-item active">
+						<a href="/registrazione" method = "GET" class="nav-link">Registrati</a>
+					</li>
+				<% }
+				else { %>
+					<li class="nav-item active">
+						<a href="/cronologiaPrenotazioni" method = "GET" class="nav-link">Cronologia Prenotazioni</a>
+					</li>
+					<li class="nav-item active">
+						<a href="/LogoutCliente" method = "GET" class="nav-link">Logout</a>
+					</li>
+				<% } %>
+			</ul>
+	      </div>
+	    </div>
+    </nav>
+
+    
+    <div class="hero-wrap" style="background-image: url('images/bg_1.jpg');">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row no-gutters slider-text d-flex align-itemd-end justify-content-center">
+          <div class="col-md-9 ftco-animate text-center d-flex align-items-end justify-content-center">
+          	<div class="text">
+	            <h1 class ="mb-4 bread"> Ecco qui la tua struttura! </h1>
+	            <h2 class="mb-4 bread">Prenota ora! </h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <section class="ftco-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8">
+          		  <div class="col-md-12 ftco-animate">
+                <h2 class="mb-4"><%=dettaglio.nome_str%></h2>
+          			<div class="single-slider owl-carousel">
+          				<div class="item">
+          					<div href="public/images/filesystem/<%=dettaglio.nome_imm1%>" class="room-img image-popup" style="background-image: url(public/images/filesystem/<%=dettaglio.nome_imm1%>);"></div>
+          				</div>
+          				<div class="item">
+          					<div href="public/images/filesystem/<%=dettaglio.nome_imm2%>" class="room-img image-popup" style="background-image: url(public/images/filesystem/<%=dettaglio.nome_imm2%>);"></div>
+          				</div>
+          				<div class="item">
+          					<div href="public/images/filesystem/<%=dettaglio.nome_imm3%>" class="room-img image-popup" style="background-image: url(public/images/filesystem/<%=dettaglio.nome_imm3%>);"></div>
+          				</div>
+                  <div class="item">
+          					<div href="public/images/filesystem/<%=dettaglio.nome_imm4%>" class="room-img image-popup" style="background-image: url(public/images/filesystem/<%=dettaglio.nome_imm4%>);"></div>
+          				</div>
+                  <div class="item">
+          					<div href="public/images/filesystem/<%=dettaglio.nome_imm5%>" class="room-img image-popup" style="background-image: url(public/images/filesystem/<%=dettaglio.nome_imm5%>);"></div>
+          				</div>
+          			</div>
+              </div>
+
+              <h3>Descrizione</h3>
+              <p> <%=dettaglio.descrizione_struttura%> </p>
+        </div>
+
+      	<% if (sessione != undefined) { %>
+        <div class="col-lg-3 sidebar">
+	      		<div class="sidebar-wrap bg-light ftco-animate">
+              <div class="form-group">
+                <label>Data arrivo</label>
+                    <input name="data_arrivo" id="data_arrivo" type="text" class="form-control" placeholder="data arrivo" value="<%=data_arrivo%>" disabled>
+  		            </div>
+                  <div class="form-group">
+                <label>Data ritorno</label>
+                    <input name="data_ritorno" id="data_ritorno" type="text" class="form-control" placeholder="data arrivo" value="<%=data_ritorno%>" disabled>
+                  </div>
+                  <div class="form-group">
+                <label>Adulti</label>
+                    <input name="adulti" id="adulti" type="number" class="form-control" placeholder="Adulti" value="<%=adulti%>" disabled>
+                  </div>
+                  <div class="form-group">
+                <label>Ragazzi</label>
+                    <input name="ragazzi" id="ragazzi" type="number" class="form-control" placeholder="Ragazzi" value="<%=ragazzi%>" disabled>
+                  </div>
+                  <div class="form-group">
+                <label>Bambini</label>
+                    <input name="bambini" id="bambini" type="number" class="form-control" placeholder="Bambini" value="<%=bambini%>" disabled>
+                  </div>
+                  <div class="form-group">
+                <label>Importo</label>
+                    <input name="importo" id="importo" type="text" class="form-control" placeholder="Totale" value="<%=totale%>" disabled>
+                  </div>
+
+                  <div class="form-group">
+                    <form action ='/prenotazioneCliente' method='POST'>
+                    <input type="hidden" name="nome_str_prenotata" value='<%=dettaglio.nome_str%>'>
+                    <input type="hidden" name="emailproprietario" value='<%=dettaglio.ref_prop%>'>
+                    <input type="submit" value="Prenota" class="btn btn-primary py-3 px-5">
+                  </form>
+		              </div>
+            </div>
+          </div>
+          <% }
+        else { %>
+          <div class="col-lg-3 sidebar responsive" >
+	      		<div class="sidebar-wrap bg-light ftco-animate" style="margin-top: 100px;">
+         <h4>Vuoi prenotare questa struttura? Effettua <a href="/accesso" method="GET" class="link-aut" > l'accesso </a> oppure <a href="/registrazione" method="GET" class="link-aut" >registrati</a>
+        </div>
+      </div>
+          <% } %>
+
+          		<div class="col-md-12 room-single mt-4 mb-5 ftco-animate rowTop" style="display: flex; justify-content: space-between; ">
+                <div class="d-md-flex mt-5 mb-5 sotto">
+                  <ul class="list" >
+    						<li>Situato a : <%=dettaglio.comune%></li>
+                <li>CAP: <span> <%=dettaglio.cap%> </span> </li>
+              </ul>
+              <ul class="list ml-md-5">
+                <li>in via : <%=dettaglio.indirizzo%> </li>
+                <li><span>Distanza dal centro: </span> <%=dettaglio.distanza_km_centro%> km </li>
+              </ul>
+                <ul class="list ml-md-5">
+                  <li><span>Civico: </span> <%=dettaglio.civico%> </li>
+                  <li><span>Tassa di soggiorno: </span> <%=dettaglio.tassa_di_soggiorno%> </li>
+                </ul>
+              </div>
+
+    						<div class="d-md-flex mt-5 mb-5 sotto">
+                  <ul class="list ml-md-5">
+                    <li style="color:red;"><span style="color:black">Numero ospiti rimanenti: </span> <%=dettaglio.num_ospiti%></li>
+	    							<li><span>Camera Singole rimanenti: </span> <%=dettaglio.camera_singola%> </li>
+	    							<li><span>Camera Doppia rimanenti: </span> <%=dettaglio.camera_doppia%></li>
+                    <li><span>Camera Tripla rimanenti: </span> <%=dettaglio.camera_tripla%></li>
+	    							<li><span>Camera Quadrupla rimanenti: </span> <%=dettaglio.camera_quadrupla%></li>
+	    						</ul>
+                </div>
+            </div> 
+            <div class="sotto">
+            <p>Contattaci al numero : <%=dettaglio.telefono%></p>
+          </div>
+              <div class="col-md-12 properties-single ftco-animate mb-5 mt-4">
+                <h4 class="mb-4"> Servizi </h4>
+                <div class="row">
+          				<div class="row-md-10">
+                    <% if (dettaglio.colazione == 1) { %>
+                    <input class="checkbox-booking" type="checkbox" name="booking" id="booking-1" disabled>
+                    <label class="for-checkbox-booking" for="booking-1">
+                     </i><span class="text">Colazione</span> <i class="fas fa-coffee"></i>
+                    </label>
+                    <% } %>
+                    <% if (dettaglio.wifi == 1) { %>
+                    <input class="checkbox-booking" type="checkbox" name="booking" id="booking-2" disabled>
+                    <label class="for-checkbox-booking" for="booking-2">
+                     <span class="text">wifi</span><i class="fas fa-wifi"></i>
+                    </label>
+                    <% } %>
+                    <% if (dettaglio.piscina == 1) { %>
+                    <input class="checkbox-booking" type="checkbox" name="booking" id="booking-3" disabled>
+                    <label class="for-checkbox-booking" for="booking-3">
+                     <span class="text">piscina</span><i class="fas fa-swimming-pool"></i>
+                    </label>
+                    <% } %>
+                    <% if (dettaglio.giardino == 1) { %>
+                    <input class="checkbox-booking" type="checkbox" name="booking" id="booking-4" disabled>
+                    <label class="for-checkbox-booking" for="booking-4">
+                     <span class="text">giardino</span><i class="fab fa-pagelines"></i>
+                    </label>
+                    <% } %>
+                    <% if (dettaglio.parcheggio == 1) { %>
+                    <input class="checkbox-booking" type="checkbox" name="booking" id="booking-5" disabled>
+                    <label class="for-checkbox-booking" for="booking-5">
+                     <span class="text">parcheggio</span><i class="fas fa-parking"></i>
+                    </label>
+                    <% } %>
+                    <% if (dettaglio.tv == 1) { %>
+                    <input class="checkbox-booking" type="checkbox" name="booking" id="booking-6" disabled>
+                     <label class="for-checkbox-booking" for="booking-6">
+                      <span class="text">tv</span><i class="fas fa-tv"></i>
+                     </label>
+                     <% } %>
+                     <% if (dettaglio.libri == 1) { %>
+                     <input class="checkbox-booking" type="checkbox" name="booking" id="booking-7" disabled>
+                    <label class="for-checkbox-booking" for="booking-7">
+                     <span class="text">libri</span> <i class="fas fa-book"></i><i class="fas fa-book"></i>
+                    </label>
+                    <% } %>
+                    <% if (dettaglio.palestra == 1) { %>
+                    <input class="checkbox-booking" type="checkbox" name="booking" id="booking-8" disabled>
+                    <label class="for-checkbox-booking" for="booking-8">
+                     <span class="text">palestra</span><i class="fas fa-dumbbell"></i>
+                    </label>
+                    <% } %>
+                    <% if (dettaglio.animali == 1) { %>
+                    <input class="checkbox-booking" type="checkbox" name="booking" id="booking-9" disabled>
+                    <label class="for-checkbox-booking" for="booking-9">
+                     <span class="text">Animali Ammessi</span><i class="fas fa-paw"></i>
+                    </label>
+                    <% } %>
+                    <% if (dettaglio.cucina == 1) { %>
+                    <input class="checkbox-booking" type="checkbox" name="booking" id="booking-10" disabled>
+                    <label class="for-checkbox-booking" for="booking-10">
+                     <span class="text">Cucina</span><i class="fas fa-utensils"></i>
+                    </label>
+                    <% } %>
+                    <% if (dettaglio.fumare == 1) { %>
+                    <input class="checkbox-booking" type="checkbox" name="booking" id="booking-11" disabled>
+                    <label class="for-checkbox-booking" for="booking-11">
+                     <span class="text">Fumare</span><i class="fas fa-smoking-ban"></i>
+                    </label>
+                    <% } %>
+                    <% if (dettaglio.doccia == 1) { %>
+                    <input class="checkbox-booking" type="checkbox" name="booking" id="booking-12" disabled>
+                    <label class="for-checkbox-booking" for="booking-12">
+                     <span class="text">Bagno Privato</span><i class="fas fa-shower"></i>
+                    </label>
+                    <% } %>
+                    <% if (dettaglio.condizionatore == 1) { %>
+                      <input class="checkbox-booking" type="checkbox" name="booking" id="booking-13" disabled>
+                      <label class="for-checkbox-booking" for="booking-13">
+                       <span class="text">Aria condizionata</span><i class="fas fa-wind"></i>
+                      </label>
+                    <% } %>
+
+                  </div>
+                </div>
+              </div>
+          		<div class="col-md-12 properties-single ftco-animate mb-5 mt-4">
+          			<h4 class="mb-4">Recensioni &amp; Punteggi</h4>
+          			<div class="row">
+          				<div class="col-md-6">
+                    <% recensione.forEach(function(recensione, stella){%>
+                      <div class="recensioniItem container-fluid" >
+                        <h6><%= recensione.ref_client %></h6>
+                        <p id="valutazione">  </p> <script type="text/javascript">Stella(<%=recensione.punteggio%>)</script>
+                        <p> <%=recensione.commento%> </p>
+                      </div>
+                    <%}); %>
+          				</div>
+          			</div>
+          		</div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <section class="instagram">
+      <div class="container-fluid">
+        <div class="row no-gutters justify-content-center pb-5">
+          <div class="col-md-7 text-center heading-section ftco-animate">
+            <h2><span>Instagram</span></h2>
+          </div>
+        </div>
+        <div class="row no-gutters">
+          <div class="col-sm-12 col-md ftco-animate">
+            <a class="insta-img" style="background-image: url(images/insta-1.jpg);">
+              <div class="icon d-flex justify-content-center">
+                <span class="icon-instagram align-self-center"></span>
+              </div>
+            </a>
+          </div>
+          <div class="col-sm-12 col-md ftco-animate">
+            <a class="insta-img" style="background-image: url(images/insta-2.jpg);">
+              <div class="icon d-flex justify-content-center">
+                <span class="icon-instagram align-self-center"></span>
+              </div>
+            </a>
+          </div>
+          <div class="col-sm-12 col-md ftco-animate">
+            <a class="insta-img" style="background-image: url(images/insta-3.jpg);">
+              <div class="icon d-flex justify-content-center">
+                <span class="icon-instagram align-self-center"></span>
+              </div>
+            </a>
+          </div>
+          <div class="col-sm-12 col-md ftco-animate">
+            <a class="insta-img" style="background-image: url(images/insta-4.jpg);">
+              <div class="icon d-flex justify-content-center">
+                <span class="icon-instagram align-self-center"></span>
+              </div>
+            </a>
+          </div>
+          <div class="col-sm-12 col-md ftco-animate">
+            <a class="insta-img" style="background-image: url(images/insta-5.jpg);">
+              <div class="icon d-flex justify-content-center">
+                <span class="icon-instagram align-self-center"></span>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="ftco-footer ftco-bg-dark ftco-section">
+      <div class="container">
+        <div class="row mb-5">
+          <div class="col-md">
+            <div class="ftco-footer-widget mb-4">
+              <h2 class="ftco-heading-2">Maag</h2>
+              <p>Maag è un'agenzia di viaggi online per le prenotazioni di alloggi.
+                 Il sito offre una scelta ampissima, con oltre 100.000 alloggi in tutta Italia.
+                 Trovare un'offerta vantaggiosa con Maag è davvero semplice: basta un click per prenotare la tua vacanza personalizzata.
+                 È di proprietà ed è gestito dal Team Maag con sede a Palermo</p>
+				 <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
+           <li class="ftco-animate"><a href="https://twitter.com/Maag06755356" target="_blank"><span class="icon-twitter"></span></a></li>
+           <li class="ftco-animate"><a href="https://www.facebook.com/Maag-108011384314882/?ref=page_internal" target="_blank"><span class="icon-facebook"></span></a></li>
+           <li class="ftco-animate"><a href="https://www.instagram.com/maag1920/" target="_blank"><span class="icon-instagram"></span></a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md">
+            <div class="ftco-footer-widget mb-4 ml-md-5">
+              <h2 class="ftco-heading-2">Info utili</h2>
+              <p>Clicca sul pulsante registrati che trovi in alto nella pagina, compila il form, e sei subito dei nostri</p>
+              <p>Sei nel posto giusto, inserire la propria struttura è del tutto gratuito, comincia subito a fare affari con un semplice click.</p>
+              <p>Quando sei indeciso sulla prenotazione di una struttura, dai sempre un'occhiata alle recensioni, potrebbero aiutarti nella tua scelta </p>
+            </div>
+          </div>
+          <div class="col-md">
+             <div class="ftco-footer-widget mb-4">
+              <h2 class="ftco-heading-2">Privacy</h2>
+              <p>I tuoi dati sono al sicuro, protetti con la tecnologia HTTPS che garantisce una completa cifratura dei tuoi dati sensibili </p>
+            </div>
+          </div>
+          <div class="col-md">
+            <div class="ftco-footer-widget mb-4">
+            	<h2 class="ftco-heading-2">Hai domande? Contattaci</h2>
+            	<div class="block-23 mb-3">
+				  <ul>
+					<li><p><span class="icon icon-envelope"></span><a class="text" href="mailto:martinamilazzo@gmail.com">Martina Milazzo</a></p></li>
+                  	<li><p><span class="icon icon-envelope"></span><a class="text" href="mailto:alextorre95@gmail.com">Alessandro Torregrossa</a></p></li>
+                  	<li><p><span class="icon icon-envelope"></span><a class="text" href="mailto:fixdo97@libero.it">Andrea Costa</a></p></li>
+                  	<li><p><span class="icon icon-envelope"></span><a class="text" href="mailto:giuseppecacciafeda98@libero.it">Giuseppe Cacciafeda</a></p></li>
+	              </ul>
+	            </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <p>Copyright &copy;<script>document.write(new Date().getFullYear());</script> Tutti i diritti riservati dal Team Maag</p>
+            <p>Corso di laurea : Ingegneria Informatica, Università degli studi di Palermo, Sicilia </p>
+          </div>
+        </div>
+      </div>
+	</footer>
+
+
+  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+
+  <%- include('../../script/Alert.ejs') %>
+
+  <script src="../public/js/index/jquery.min.js"></script>
+  <script src="../public/js/index/jquery-migrate-3.0.1.min.js"></script>
+  <script src="../public/js/index/popper.min.js"></script>
+  <script src="../public/js/index/bootstrap.min.js"></script>
+  <script src="../public/js/index/jquery.easing.1.3.js"></script>
+  <script src="../public/js/index/jquery.waypoints.min.js"></script>
+  <script src="../public/js/index/jquery.stellar.min.js"></script>
+  <script src="../public/js/index/owl.carousel.min.js"></script>
+  <script src="../public/js/index/jquery.magnific-popup.min.js"></script>
+  <script src="../public/js/index/aos.js"></script>
+  <script src="../public/js/index/jquery.animateNumber.min.js"></script>
+  <script src="../public/js/index/bootstrap-datepicker.js"></script>
+  <script src="../public/js/index/scrollax.min.js"></script>
+  <script src="../public/js/index/main.js"></script>
+
+  </body>
+</html>

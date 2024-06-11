@@ -1,0 +1,21 @@
+<link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i" rel="stylesheet">
+
+<% if(errormessage) { %>
+	<div style="display : none;">
+		<a id="alertCustom" href="#popup1"></a>
+	</div>
+	<div id="popup1" class="overlay">
+	<div class="popup">
+		<h1>Attenzione!</h1>
+		<a class="close" href="#">&times;</a>
+		<div class="content">
+			<%=errormessage%>
+		</div>
+	</div>
+	</div>
+	<script>document.getElementById("alertCustom").click();</script>
+	
+<% } %> 
+
+<link rel="stylesheet" type="text/css" href="../../public/stylesheets/css/index/alert.css">

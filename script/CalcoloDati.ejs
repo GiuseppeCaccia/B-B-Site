@@ -1,0 +1,31 @@
+<script>
+    function CalcoloDati() {
+      var strutture = new Set();
+      var guadagni = 0;
+      var richieste = 0;
+      var proprietario = "";
+      var oggi = new Date();
+
+      <% guadagni.forEach(function(guadagni){%>
+        if(<%=guadagni.pagato%> == 1){
+          guadagni = guadagni + (<%=guadagni.importo%>);
+        }
+        else{
+          richieste = richieste + 1;
+        }
+      <%}); %>
+
+      <% struttura.forEach(function (struttura) {%>
+        strutture.add("<%=struttura.nome_str%>");
+      <%}); %>
+
+    var MediaGuadagniMensili = guadagni / 12 || 0;
+    var MediaGuadagniAnnuali = guadagni;
+    MediaGuadagniMensili = (Math.round(MediaGuadagniMensili * 100) / 100).toFixed(2);
+    MediaGuadagniAnnuali = (Math.round(MediaGuadagniAnnuali * 100) / 100).toFixed(2);
+    document.getElementById("guadagni_mensili").innerHTML = "€" + MediaGuadagniMensili;
+    document.getElementById("guadagni_annuali").innerHTML = "€" + MediaGuadagniAnnuali;
+    document.getElementById("strutture_possedute").innerHTML = strutture.size;
+    document.getElementById("richieste_sospeso").innerHTML = richieste;
+    }
+</script>
